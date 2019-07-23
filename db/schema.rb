@@ -13,10 +13,10 @@
 ActiveRecord::Schema.define(version: 2019_07_23_023741) do
 
   create_table "tasks", force: :cascade do |t|
-    t.string "title"
-    t.string "body"
+    t.string "title", null: false
+    t.string "body", null: false
     t.date "deadline"
-    t.integer "status"
+    t.integer "status", null: false
     t.string "file"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
