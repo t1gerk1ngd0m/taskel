@@ -15,11 +15,10 @@ class TasksController < ApplicationController
 	def create
 		@task = Task.new(task_params)
 		if @task.save
-			binding.pry
 			flash[:saved] = t 'tasks.index.saved'
 			redirect_to root_path
 		else
-			flash[:save_failed] = t 'tasks.index.save_failed'
+			flash[:save_failed] = t 'tasks.new.save_failed'
 			render :new
 		end
 	end
@@ -31,10 +30,10 @@ class TasksController < ApplicationController
 	def update
 		@task = Task.find(params[:id])
 		if @task.update(task_params)
-			flash[:edited] = t 'tasks.index.edited'
+			flash[:edited] = t 'tasks.show.edited'
 			redirect_to action: 'show'
 		else
-			flash[:edit_failed] = t 'tasks.index.edit_failed'
+			flash[:edit_failed] = t 'tasks.edit.edit_failed'
 			render :edit
 		end
 	end
@@ -45,7 +44,7 @@ class TasksController < ApplicationController
 			flash[:deleted] = t 'tasks.index.deleted'
 			redirect_to root_path      
 		else
-			flash[:delete_failed] = t 'tasks.index.delete_failed'
+			flash[:delete_failed] = t 'tasks.show.delete_failed'
 			render :show
 		end
 	end
