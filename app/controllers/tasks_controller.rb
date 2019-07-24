@@ -13,9 +13,9 @@ class TasksController < ApplicationController
     end
 
     def create
-        binding.pry
         Task.create(title: task_params[:title], body: task_params[:body], status: task_params[:status])
-        redirect_to action: 'index'
+        flash[:create] = "タスクを作成しました"
+        redirect_to root_path
     end
 
     def edit
@@ -25,6 +25,8 @@ class TasksController < ApplicationController
     def update
         @task = Task.find(params[:id])
         @task.update(task_params)
+        flash[:update] = "タスクを編集しました"
+        redirect_to action: 'show'
     end
 
     def destroy
