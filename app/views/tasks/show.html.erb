@@ -4,3 +4,11 @@
 <p>
     <%= @task.title %>
 </p>
+<ul>
+    <li>
+        <%= link_to '編集', "/tasks/#{@task.id}/edit", method: :get %>
+    </li>
+    <li>
+        <%= link_to '削除', "/tasks/#{@task.id}", method: :delete %>
+    </li>
+</ul>
