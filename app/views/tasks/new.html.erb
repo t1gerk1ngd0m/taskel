@@ -1,0 +1,12 @@
+<h1>新規作成画面</h1>
+
+<%= form_for @task do |f| %>
+    <h2>投稿する</h2>
+    <%= f.label :title, "タイトル" %>
+    <%= f.text_field :title, placeholder: "タスクタイトル" %>
+    <%= f.label :body, "内容" %>
+    <%= f.text_area :body, placeholder: "タスク内容" %>
+    <%= f.label :status, "ステータス" %>
+    <%= f.select :status, Task.statuses.keys, {} %>
+    <%= f.button "作成する", type: "submit" %>
+<% end %>
