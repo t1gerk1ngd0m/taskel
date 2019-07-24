@@ -1,6 +1,16 @@
 <h1>詳細画面</h1>
-<%= flash[:update] %>
+<%= flash[:edited] %>
+<%= flash[:delete_failed] %>
+
 <h2>タスクタイトル</h2>
 <p>
-    <%= @task.title %>
+	<%= @task.title %>
 </p>
+<ul>
+	<li>
+		<%= link_to '編集', "/tasks/#{@task.id}/edit", method: :get %>
+	</li>
+	<li>
+		<%= link_to '削除', "/tasks/#{@task.id}", method: :delete %>
+	</li>
+</ul>
