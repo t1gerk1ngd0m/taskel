@@ -1,0 +1,12 @@
+<h1>編集画面</h1>
+
+<%= form_for @task, url: { action: :update } do |f| %>
+    <h2>編集する</h2>
+    <%= f.label :title, "タイトル" %>
+    <%= f.text_field :title, placeholder: "タスクタイトル" %>
+    <%= f.label :body, "内容" %>
+    <%= f.text_area :body, placeholder: "タスク内容" %>
+    <%= f.label :status, "ステータス" %>
+    <%= f.select :status, Task.statuses.keys, {} %>
+    <%= f.button "編集する", type: "submit" %>
+<% end %>
