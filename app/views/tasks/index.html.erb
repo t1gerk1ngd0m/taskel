@@ -1,5 +1,7 @@
 <h1>一覧画面</h1>
-<%= flash[:notice] %>
+<%= flash[:saved] %>
+<%= flash[:deleted] %>
+
 <% @tasks.each do |task| %>
     <p>
         <% task.title %>

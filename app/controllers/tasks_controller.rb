@@ -15,10 +15,10 @@ class TasksController < ApplicationController
     def create
         @task = Task.new(task_params)
         if @task.save
-            flash[:notice] = "タスクを作成しました"
+            flash[:saved] = "タスクを作成しました"
             redirect_to root_path
         else
-            flash[:notice] = "タスクの作成に失敗しました"
+            flash[:save_failed] = "タスクの作成に失敗しました"
             render :new
         end
     end
@@ -30,10 +30,10 @@ class TasksController < ApplicationController
     def update
         @task = Task.find(params[:id])
         if @task.update(task_params)
-            flash[:notice] = "タスクを編集しました"
+            flash[:edited] = "タスクを編集しました"
             redirect_to action: 'show'
         else
-            flash[:notice] = "タスクの編集に失敗しました"
+            flash[:edit_failed] = "タスクの編集に失敗しました"
             render :edit
         end
     end
@@ -41,10 +41,10 @@ class TasksController < ApplicationController
     def destroy
         @task = Task.find(params[:id])
         if @task.destroy
-            flash[:notice] = "タスクを削除しました"
+            flash[:deleted] = "タスクを削除しました"
             redirect_to root_path      
         else
-            flash[:notice] = "タスクの削除に失敗しました"
+            flash[:delete_failed] = "タスクの削除に失敗しました"
             render :show
         end
     end
