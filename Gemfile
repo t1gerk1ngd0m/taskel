@@ -66,3 +66,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'pg'
 gem 'dotenv-rails'
 gem 'rails-i18n', '~> 5.1'
+gem 'bootstrap', '~> 4.3.1'
+gem 'jquery-rails'
