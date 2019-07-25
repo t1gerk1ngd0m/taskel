@@ -1,35 +1,35 @@
 <div class="task-index">
-	<h1 class="task-index__title">タスク一覧</h1>
-	<%= flash[:saved] %>
-	<%= flash[:deleted] %>
+  <h1 class="task-index__title">タスク一覧</h1>
+  <%= flash[:saved] %>
+  <%= flash[:deleted] %>
 
-	<div class="task-index__tasks">
-		<% @tasks.each do |task| %>
-			<div class="task-index__task">
-				<p class="task-index__task--title">
-					<%= task.title %>
-				</p>
-				<p class="task-index__task--body">
-					<%= task.body %>
-				</p>
-				<p class="task-index__task--deadline">
-					<%= task.deadline %>
-				</p>
-				<p class="task-index__task--status">
-					<%= task.status %>
-				</p>
-				<ul class="task-index__task--menu">
-					<li class="task-index__task--li">
-						<%= link_to "詳細", task_path(task.id), method: :get %>
-					</li>
-					<li class="task-index__task--li">
-						<%= link_to "編集", "/tasks/#{task.id}/edit", method: :get %>
-					</li>
-					<li class="task-index__task--li">
-						<%= link_to "削除", "/tasks/#{task.id}", method: :delete %>
-					</li>
-				</ul>
-			</div>
-		<% end %>
-	</div>
+  <div class="task-index__tasks">
+    <% @tasks.each do |task| %>
+      <div class="task-index__task">
+        <p class="task-index__task--title">
+          <%= task.title %>
+        </p>
+        <p class="task-index__task--body">
+          <%= task.body %>
+        </p>
+        <p class="task-index__task--deadline">
+          <%= task.deadline %>
+        </p>
+        <p class="task-index__task--status">
+          <%= task.status %>
+        </p>
+        <ul class="task-index__task--menu">
+          <li class="task-index__task--li">
+            <%= link_to "詳細", task_path(task.id), method: :get %>
+          </li>
+          <li class="task-index__task--li">
+            <%= link_to "編集", "/tasks/#{task.id}/edit", method: :get %>
+          </li>
+          <li class="task-index__task--li">
+            <%= link_to "削除", "/tasks/#{task.id}", method: :delete %>
+          </li>
+        </ul>
+      </div>
+    <% end %>
+  </div>
 </div>
