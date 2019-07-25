@@ -1,3 +1,42 @@
 // Place all the styles related to the Tasks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.task-index {
+  width: 100%;
+  margin: 50px auto 0;
+  &__title {
+    width: 100%;
+  }
+  &__tasks {
+    width: 100%;
+    margin-top: 50px;
+  }
+  &__task {
+    width: 95%;
+    margin: 0 auto 10px;
+    border: 2px #343a40 solid;
+    padding: 20px;
+  }
+  &__task--title {
+    font-weight: bold;
+    font-size: 30px;
+  }
+  &__task--body {
+    font-size: 24px;
+  }
+  &__task--menu {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  &__task--li {
+    width: 33%;
+    text-align: center;
+    border: 1px #343a40 solid;
+    a {
+      display: block;
+    }
+  }
+}
