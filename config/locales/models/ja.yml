@@ -3,6 +3,7 @@ ja:
     models:
       task: タスク
     attributes:
-      title: タスクタイトル
-      body: タスク本文
-      status: ステータス
+      task:
+        title: タイトル
+        body: 本文
+        status: ステータス
