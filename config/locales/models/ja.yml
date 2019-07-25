@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    models:
+      task: タスク
+    attributes:
+      task:
+        title: タイトル
+        body: 本文
+        deadline: 納期
+        status: ステータス
+        file: 添付ファイル
