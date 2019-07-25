@@ -1,19 +1,28 @@
-<h1>新規作成画面</h1>
-<%= flash[:save_failed] %>
+<div class="task-new">
+  <h1 class="task-index__show">新規作成画面</h1>
+  <%= flash[:save_failed] %>
 
-<% if @task.errors.any? %>
-	<% @task.errors.full_messages.each do |message| %>
-		<p><%= message %></p>
-	<% end %>
-<% end %>
+  <% if @task.errors.any? %>
+    <% @task.errors.full_messages.each do |message| %>
+      <p><%= message %></p>
+    <% end %>
+  <% end %>
 
-<%= form_with model: @task, local: true do |f| %>
-	<h2>投稿する</h2>
-	<%= f.label :title, "タイトル" %>
-	<%= f.text_field :title, placeholder: "タスクタイトル" %>
-	<%= f.label :body, "内容" %>
-	<%= f.text_area :body, placeholder: "タスク内容" %>
-	<%= f.label :status, "ステータス" %>
-	<%= f.select :status, Task.statuses.keys, {} %>
-	<%= f.button "作成する", type: "submit" %>
-<% end %>
+  <div class="task-new__form">
+    <%= form_with model: @task, local: true do |f| %>
+      <div class="form-group">
+        <%= f.label :title, "タイトル" %>
+        <%= f.text_field :title, placeholder: "タスクタイトル", class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :body, "内容" %>
+        <%= f.text_area :body, placeholder: "タスク内容", class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :status, "ステータス" %>
+        <%= f.select :status, Task.statuses.keys, {}, class: "form-control" %>
+      </div>
+      <%= f.button "作成する", type: "submit", class: "btn btn-primary mb-2" %>
+    <% end %>
+  </div>
+</div>
