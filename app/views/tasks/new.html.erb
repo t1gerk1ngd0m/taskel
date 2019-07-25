@@ -7,7 +7,7 @@
 	<% end %>
 <% end %>
 
-<%= form_with model: @task do |f| %>
+<%= form_with model: @task, local: true do |f| %>
 	<h2>投稿する</h2>
 	<%= f.label :title, "タイトル" %>
 	<%= f.text_field :title, placeholder: "タスクタイトル" %>
