@@ -17,5 +17,10 @@ describe Task do
       task.valid?
       expect(task.errors[:status]).to include("を入力してください")
     end
+    it "is valid with a title, body, status" do
+      task = build(:task, deadline: "", file: "")
+      task.valid?
+      expect(task).to be_valid
+    end
   end
 end
