@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
     @tasks = Task.all
@@ -9,7 +10,6 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = Task.find(params[:id])
   end
 
   def create
@@ -24,11 +24,9 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
   end
 
   def update
-    @task = Task.find(params[:id])
     if @task.update(task_params)
       flash[:edited] = t 'tasks.show.edited'
       redirect_to action: 'show'
@@ -39,7 +37,6 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task = Task.find(params[:id])
     if @task.destroy
       flash[:deleted] = t 'tasks.index.deleted'
       redirect_to root_path      
@@ -52,5 +49,9 @@ class TasksController < ApplicationController
   private
   def task_params
     params.require(:task).permit(:title, :body, :status)
+  end
+
+  def set_task
+    @task = Task.find(params[:id])
   end
 end
