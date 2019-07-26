@@ -21,8 +21,8 @@ RSpec.describe 'Tasks', type: :system do
 
       click_button '作成する'
       binding.pry
-      expect(response).to redirect_to(root_path)
-      expect(flash[:notice]).to be_present
+      # expect(response).to redirect_to(root_path)
+      expect(page).to have_content("タスクを作成しました")
     end
   end
 
