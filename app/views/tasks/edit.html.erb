@@ -1,6 +1,6 @@
 <div class="task-new">
   <h1>編集画面</h1>
-  <%= flash[:edit_failed] %>
+  <%= flash[:failed] %>
 
   <% if @task.errors.any? %>
     <% @task.errors.full_messages.each do |message| %>

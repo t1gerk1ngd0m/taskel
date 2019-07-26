@@ -1,7 +1,6 @@
 <div class="task-index">
   <h1 class="task-index__title">タスク一覧</h1>
-  <%= flash[:saved] %>
-  <%= flash[:deleted] %>
+  <%= flash[:success] %>
 
   <div class="task-index__tasks">
     <% @tasks.each do |task| %>
