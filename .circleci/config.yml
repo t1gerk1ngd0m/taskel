@@ -9,7 +9,7 @@ jobs: # a collection of steps
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
           PGHOST: 127.0.0.1
-          PGUSER: circleci-demo-ruby
+          PGUSER: root
           RAILS_ENV: test
       - image: circleci/11.4-alpine-postgis-ram # database image
         environment: # environment variables for database
