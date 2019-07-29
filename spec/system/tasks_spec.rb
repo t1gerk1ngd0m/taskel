@@ -54,6 +54,9 @@ RSpec.describe 'Tasks', type: :system do
 
       expect(page).to have_content("タスク詳細")
       expect(page).to have_content("タスクを編集しました")
+      expect(page).to (
+        have_content(@task.title) && have_content(@task.body) && have_content(@task.status)
+      )
     end
 
     scenario 'fail in task editation', type: :system do
