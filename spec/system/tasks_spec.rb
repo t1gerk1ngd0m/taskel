@@ -64,6 +64,38 @@ RSpec.describe 'Tasks', type: :system do
     end
   end
 
+  feature 'index page' do
+
+    before do
+      @task = Task.create(title: "タスクテスト", body: "タスクテスト本文", status: 1)
+    end
+
+    scenario 'succeed in task destruction in index page', type: :system do
+      visit root_path
+
+      click_on '削除'
+
+      expect(page).to have_content("タスク一覧")
+      expect(page).to have_content("タスクを削除しました")
+    end
+  end
+
+  feature 'show page' do
+
+    before do
+      @task = Task.create(title: "タスクテスト", body: "タスクテスト本文", status: 1)
+    end
+
+    scenario 'succeed in task destruction in show page', type: :system do
+      visit task_path(id: @task.id)
+
+      click_on '削除'
+
+      expect(page).to have_content("タスク一覧")
+      expect(page).to have_content("タスクを削除しました")
+    end
+  end
+
   # all('a').map { |link| link[:href] }.reject{ |url| url.nil? }.each do |url|
   #   visit url
   #   expect(page).to have_http_status(:success)
