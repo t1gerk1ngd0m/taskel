@@ -22,7 +22,7 @@
         <%= f.label :status, "ステータス" %>
         <%= f.select :status, Task.statuses.keys, {}, class: "form-control" %>
       </div>
-      <%= f.button "作成する", type: "submit", class: "btn btn-primary mb-2" %>
+      <%= f.button t('buttons.create'), type: "submit", class: "btn btn-primary mb-2" %>
     <% end %>
   </div>
 </div>
