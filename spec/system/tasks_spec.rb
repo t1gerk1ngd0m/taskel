@@ -84,14 +84,14 @@ RSpec.describe 'Tasks', type: :system do
 
     scenario 'sorted by creation date', type: :system do
       visit root_path
-      created_at = ".task-index__task--created_at"
+      created_at = all(".task-index__task--created_at")
 
       expect(page).to have_content("タスク一覧")
 
       # i番目のデータの作成日時がi+1番目のデータの作成日時よりもあとであることを確認
       4.times do |i|
-        if(all(created_at)[i+1])
-          expect(all(created_at)[i].text()).to be > all(created_at)[i+1].text()
+        if(created_at[i+1])
+          expect(created_at[i].text()).to be > created_at[i+1].text()
         end
       end
     end
