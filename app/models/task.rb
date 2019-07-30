@@ -3,5 +3,4 @@ class Task < ApplicationRecord
 	validates :title, presence: true
 	validates :body, presence: true
 	validates :status, presence: true
-	default_scope -> { order(created_at: :desc) }
 end
