@@ -16,9 +16,9 @@ RSpec.describe 'Tasks', type: :system do
     scenario 'succeed in task creation', type: :system do
       visit new_task_path
 
-      fill_in 'task_title', with: task.title
-      fill_in 'task_body', with: task.body
-      select task.status ,from: 'task_status'
+      fill_in I18n.t('activerecord.attributes.task.title'), with: task.title
+      fill_in I18n.t('activerecord.attributes.task.body'), with: task.body
+      select task.status ,from: I18n.t('activerecord.attributes.task.status')
       click_button I18n.t('buttons.create')
 
       expect(page).to have_content("タスク一覧")
@@ -47,9 +47,9 @@ RSpec.describe 'Tasks', type: :system do
     scenario 'succeed in task editation', type: :system do
       visit edit_task_path(id: @task.id)
 
-      fill_in 'task_title', with: @task.title
-      fill_in 'task_body', with: @task.body
-      select @task.status ,from: 'task_status'
+      fill_in I18n.t('activerecord.attributes.task.title'), with: @task.title
+      fill_in I18n.t('activerecord.attributes.task.body'), with: @task.body
+      select @task.status ,from: I18n.t('activerecord.attributes.task.status')
       click_button I18n.t('buttons.update')
 
       expect(page).to have_content("タスク詳細")
