@@ -18,13 +18,14 @@ RSpec.describe 'Tasks', type: :system do
 
       fill_in I18n.t('activerecord.attributes.task.title'), with: task.title
       fill_in I18n.t('activerecord.attributes.task.body'), with: task.body
-      select task.status ,from: I18n.t('activerecord.attributes.task.status')
+      select task.status_i18n ,from: I18n.t('activerecord.attributes.task.status')
+
       click_button I18n.t('buttons.create')
 
       expect(page).to have_content("タスク一覧")
       expect(page).to have_content("タスクを作成しました")
       expect(page).to ( 
-        have_content(task.title) && have_content(task.body) && have_content(task.status)
+        have_content(task.title) && have_content(task.body) && have_content(task.status_i18n)
       )
     end
 
@@ -55,7 +56,7 @@ RSpec.describe 'Tasks', type: :system do
       expect(page).to have_content("タスク詳細")
       expect(page).to have_content("タスクを編集しました")
       expect(page).to (
-        have_content(@task.title) && have_content(@task.body) && have_content(@task.status)
+        have_content(@task.title) && have_content(@task.body) && have_content(@task.status_i18n)
       )
     end
 
@@ -101,11 +102,4 @@ RSpec.describe 'Tasks', type: :system do
       expect(page).to have_content("タスクを削除しました")
     end
   end
-
-  # all('a').map { |link| link[:href] }.reject{ |url| url.nil? }.each do |url|
-  #   visit url
-  #   expect(page).to have_http_status(:success)
-  # end
-
-
 end
