@@ -13,14 +13,29 @@
       <div class="form-group">
         <%= f.label :title, "タイトル" %>
         <%= f.text_field :title, placeholder: "タスクタイトル", class: "form-control" %>
+        <% if @task.errors.any? %>
+          <% @task.errors.full_messages_for(:title).each do |message| %>
+            <p class="valid-message"><%= message %></p>
+          <% end %>
+        <% end %>
       </div>
       <div class="form-group">
         <%= f.label :body, "内容" %>
         <%= f.text_area :body, placeholder: "タスク内容", class: "form-control" %>
+        <% if @task.errors.any? %>
+          <% @task.errors.full_messages_for(:body).each do |message| %>
+            <p class="valid-message"><%= message %></p>
+          <% end %>
+        <% end %>
       </div>
       <div class="form-group">
         <%= f.label :status, "ステータス" %>
         <%= f.select :status, Task.statuses.keys, {}, class: "form-control" %>
+        <% if @task.errors.any? %>
+          <% @task.errors.full_messages_for(:status).each do |message| %>
+            <p class="valid-message"><%= message %></p>
+          <% end %>
+        <% end %>
       </div>
       <%= f.button "編集する", type: "submit", class: "btn btn-primary mb-2" %>
     <% end %>
