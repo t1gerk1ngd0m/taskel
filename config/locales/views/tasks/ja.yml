@@ -10,3 +10,6 @@ ja:
       delete_failed: 'タスクの削除に失敗しまし'
     edit:
       edit_failed: 'タスクの編集に失敗しました'
+  buttons:
+    create: 作成する
+    update: 更新する

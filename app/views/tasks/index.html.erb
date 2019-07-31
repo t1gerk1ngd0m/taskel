@@ -15,7 +15,7 @@
           <%= task.deadline %>
         </p>
         <p class="task-index__task--status">
-          <%= task.status %>
+          <%= t task.status_i18n %>
         </p>
         <p class="task-index__task--created_at">
           <%= task.created_at.to_s(:date_time) %>
