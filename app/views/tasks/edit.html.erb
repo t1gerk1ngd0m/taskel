@@ -2,25 +2,22 @@
   <h1>編集画面</h1>
   <%= flash[:failed] %>
 
-  <% if @task.errors.any? %>
-    <% @task.errors.full_messages.each do |message| %>
-      <p><%= message %></p>
-    <% end %>
-  <% end %>
-
   <div class="task-new__form">
     <%= form_with model: @task, local: true do |f| %>
       <div class="form-group">
         <%= f.label :title, "タイトル" %>
         <%= f.text_field :title, placeholder: "タスクタイトル", class: "form-control" %>
+        <%= render 'shared/validation_message', model: f.object, attributes: :title %>
       </div>
       <div class="form-group">
         <%= f.label :body, "内容" %>
         <%= f.text_area :body, placeholder: "タスク内容", class: "form-control" %>
+        <%= render 'shared/validation_message', model: f.object, attributes: :body %>
       </div>
       <div class="form-group">
         <%= f.label :status, "ステータス" %>
         <%= f.select :status, Task.statuses.keys, {}, class: "form-control" %>
+        <%= render 'shared/validation_message', model: f.object, attributes: :status %>
       </div>
       <%= f.button "編集する", type: "submit", class: "btn btn-primary mb-2" %>
     <% end %>
