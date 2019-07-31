@@ -13,3 +13,6 @@ ja:
   buttons:
     create: 作成する
     update: 更新する
+    show: 詳細
+    edit: 編集
+    delete: 削除

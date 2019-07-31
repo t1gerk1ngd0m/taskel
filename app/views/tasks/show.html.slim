@@ -16,6 +16,6 @@
       = @task.created_at.to_s(:date_time)
     ul.task-show__task--menu
       li.task-show__task--li
-        = link_to "編集", "/tasks/#{@task.id}/edit", method: :get
+        = link_to I18n.t('buttons.edit'), "/tasks/#{@task.id}/edit", method: :get
       li.task-show__task--li
-        = link_to "削除", "/tasks/#{@task.id}", method: :delete
+        = link_to I18n.t('buttons.delete'), "/tasks/#{@task.id}", method: :delete
