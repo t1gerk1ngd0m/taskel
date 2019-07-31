@@ -58,9 +58,9 @@ jobs: # a collection of steps
       #     paths:
       #       - ~/.cache/yarn
 
-      - run:
-          name: Wait for DB
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      # - run:
+      #     name: Wait for DB
+      #     command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       - run:
           name: Database setup
