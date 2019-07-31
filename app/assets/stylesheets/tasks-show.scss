@@ -1,0 +1,41 @@
+.task-show {
+  width: 100%;
+  margin: 50px auto 0;
+  &__title {
+    width: 100%;
+  }
+  &__tasks {
+    width: 100%;
+    margin-top: 50px;
+  }
+  &__task {
+    width: 100%;
+    margin: 50px auto 10px;
+  }
+  &__task--title {
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 30px;
+  }
+  &__task--body {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+  &__task--status {
+    margin-bottom: 30px;
+  }
+  &__task--menu {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  &__task--li {
+    width: 49%;
+    text-align: center;
+    border: 1px #343a40 solid;
+    a {
+      display: block;
+    }
+  }
+}

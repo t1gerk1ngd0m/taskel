@@ -10,6 +10,13 @@
   </head>
 
   <body>
-    <%= yield %>
+    <ul class="nav justify-content-end bg-dark">
+      <li class="nav-item">
+        <a class="nav-link logout" href="#">ログアウト</a>
+      </li>
+    </ul>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

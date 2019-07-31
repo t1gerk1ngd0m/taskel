@@ -1,0 +1,15 @@
+ja:
+  tasks:
+    index:
+      saved: 'タスクを作成しました'
+      deleted: 'タスクを削除しました'
+    new:
+      save_failed: 'タスクの作成に失敗しました'
+    show:
+      edited: 'タスクを編集しました'
+      delete_failed: 'タスクの削除に失敗しまし'
+    edit:
+      edit_failed: 'タスクの編集に失敗しました'
+  buttons:
+    create: 作成する
+    update: 更新する
