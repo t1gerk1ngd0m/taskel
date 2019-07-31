@@ -11,9 +11,9 @@
 画像に記載の通り
 
 # デプロイ方法
-ターミナル上で下記のコマンドを実行
-` git push heroku master `
-下記のコマンドを実行し本番環境を確認
-` heroku open `
-本番環境でエラー発生時は下記コマンドで確認
-` heroku logs `
+ターミナル上で下記のコマンドを実行  
+` git push heroku master `  
+下記のコマンドを実行し本番環境を確認  
+` heroku open `  
+本番環境でエラー発生時は下記コマンドで確認  
+` heroku logs `  
