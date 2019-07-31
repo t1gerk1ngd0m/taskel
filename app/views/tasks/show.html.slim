@@ -1,0 +1,21 @@
+.task-show
+  h1.task-index__show
+    | タスク詳細
+  = flash[:success]
+  = flash[:failed]
+  .task-show__task
+    p.task-show__task--title
+      = @task.title
+    p.task-show__task--body
+      = @task.body
+    p.task-show__task--deadline
+      = @task.deadline
+    p.task-show__task--status
+      = @task.status_i18n
+    p.task-show__task--created_at
+      = @task.created_at.to_s(:date_time)
+    ul.task-show__task--menu
+      li.task-show__task--li
+        = link_to "編集", "/tasks/#{@task.id}/edit", method: :get
+      li.task-show__task--li
+        = link_to "削除", "/tasks/#{@task.id}", method: :delete

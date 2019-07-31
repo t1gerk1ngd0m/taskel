@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    title
+      | Taskel
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    ul.nav.justify-content-end.bg-dark
+      li.nav-item
+        a.nav-link.logout[href="#"]
+          | ログアウト
+    .container
+      = yield
