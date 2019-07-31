@@ -1,5 +1,8 @@
 # README
 
+# 本番環境
+https://taskel.herokuapp.com/
+
 # アプリ作成の目的
 このアプリはmofmof社での研修課題として作成したものです。
 このアプリの作成を通して環境構築、Ruby on Railsの基本的操作、Gitの使い方、テスト、Heroku/AWSへのデプロイなどアプリケーション作成における一連の流れを学習しています。
