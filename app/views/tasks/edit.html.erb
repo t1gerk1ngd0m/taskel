@@ -1,28 +1,25 @@
 <div class="task-new">
   <h1>編集画面</h1>
-  <%= flash[:edit_failed] %>
-
-  <% if @task.errors.any? %>
-    <% @task.errors.full_messages.each do |message| %>
-      <p><%= message %></p>
-    <% end %>
-  <% end %>
+  <%= flash[:failed] %>
 
   <div class="task-new__form">
     <%= form_with model: @task, local: true do |f| %>
       <div class="form-group">
-        <%= f.label :title, "タイトル" %>
+        <%= f.label :title, t('activerecord.attributes.task.title') %>
         <%= f.text_field :title, placeholder: "タスクタイトル", class: "form-control" %>
+        <%= render 'shared/validation_message', model: f.object, attributes: :title %>
       </div>
       <div class="form-group">
-        <%= f.label :body, "内容" %>
+        <%= f.label :body, t('activerecord.attributes.task.body') %>
         <%= f.text_area :body, placeholder: "タスク内容", class: "form-control" %>
+        <%= render 'shared/validation_message', model: f.object, attributes: :body %>
       </div>
       <div class="form-group">
-        <%= f.label :status, "ステータス" %>
+        <%= f.label :status, t('activerecord.attributes.task.status') %>
         <%= f.select :status, Task.statuses.keys, {}, class: "form-control" %>
+        <%= render 'shared/validation_message', model: f.object, attributes: :status %>
       </div>
-      <%= f.button "編集する", type: "submit", class: "btn btn-primary mb-2" %>
+      <%= f.button t('buttons.update'), type: "submit", class: "btn btn-primary mb-2" %>
     <% end %>
   </div>
 </div>

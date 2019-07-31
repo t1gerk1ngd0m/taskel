@@ -9,3 +9,9 @@ ja:
         deadline: 納期
         status: ステータス
         file: 添付ファイル
+  enums:
+    task:
+      status:
+        waiting: 未着手
+        working: 着手
+        finished: 完了

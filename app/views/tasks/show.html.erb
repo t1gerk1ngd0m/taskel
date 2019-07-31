@@ -1,7 +1,7 @@
 <div class="task-show">
   <h1 class="task-index__show">タスク詳細</h1>
-  <%= flash[:edited] %>
-  <%= flash[:delete_failed] %>
+  <%= flash[:success] %>
+  <%= flash[:failed] %>
 
   <div class="task-show__task">
     <p class="task-show__task--title">
@@ -14,7 +14,10 @@
       <%= @task.deadline %>
     </p>
     <p class="task-show__task--status">
-      <%= @task.status %>
+      <%= @task.status_i18n %>
+    </p>
+    <p class="task-show__task--created_at">
+      <%= @task.created_at.to_s(:date_time) %>
     </p>
     <ul class="task-show__task--menu">
       <li class="task-show__task--li">

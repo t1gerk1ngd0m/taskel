@@ -1,7 +1,6 @@
 <div class="task-index">
   <h1 class="task-index__title">タスク一覧</h1>
-  <%= flash[:saved] %>
-  <%= flash[:deleted] %>
+  <%= flash[:success] %>
 
   <div class="task-index__tasks">
     <% @tasks.each do |task| %>
@@ -16,7 +15,10 @@
           <%= task.deadline %>
         </p>
         <p class="task-index__task--status">
-          <%= task.status %>
+          <%= t task.status_i18n %>
+        </p>
+        <p class="task-index__task--created_at">
+          <%= task.created_at.to_s(:date_time) %>
         </p>
         <ul class="task-index__task--menu">
           <li class="task-index__task--li">
@@ -25,7 +27,7 @@
           <li class="task-index__task--li">
             <%= link_to "編集", "/tasks/#{task.id}/edit", method: :get %>
           </li>
-          <li class="task-index__task--li">
+          <li class="task-index__task--li delete">
             <%= link_to "削除", "/tasks/#{task.id}", method: :delete %>
           </li>
         </ul>
