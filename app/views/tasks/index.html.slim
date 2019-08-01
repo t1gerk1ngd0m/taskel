@@ -10,7 +10,8 @@
         p.task-index__task--body
           = task.body
         p.task-index__task--deadline
-          = task.deadline
+          - if(task.deadline)
+            = l(task.deadline, format: :default)
         p.task-index__task--status
           = t task.status_i18n
         p.task-index__task--created_at
