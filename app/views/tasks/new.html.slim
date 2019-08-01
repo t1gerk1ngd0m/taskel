@@ -16,4 +16,17 @@
         = f.label :status, t('activerecord.attributes.task.status')
         = f.select :status, Task.statuses_i18n.keys.map { |k| [Task.statuses_i18n[k], k]}, {}, class: "form-control"
         = render 'shared/validation_message', model: f.object, attributes: :status
+      .form-group
+        = f.label :deadline, t('activerecord.attributes.task.deadline')
+        #datetimepicker4.input-group.date data-target-input="nearest"
+          = f.text_field :deadline, class: "form-control datetimepicker-input", data: {target: "#datetimepicker4"}
+          .input-group-append  data-target="#datetimepicker4" data-toggle="datetimepicker"
+            .input-group-text
+               i.fa.fa-calendar
+          javascript:
+            $(function () {
+                $('#datetimepicker4').datetimepicker({
+                    format: 'L'
+                });
+            });
       = f.button t('buttons.create'), type: "submit", class: "btn btn-primary mb-2"
