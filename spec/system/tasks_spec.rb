@@ -77,7 +77,7 @@ RSpec.describe 'Tasks', type: :system do
       @task = Task.create(title: "タスクテスト１", body: "タスクテスト本文１", status: 1, deadline: "2019-08-10")
       @task = Task.create(title: "タスクテスト２", body: "タスクテスト本文２", status: 0, deadline: "2019-08-20", created_at: Time.current + 1.days)
       @task = Task.create(title: "タスクテスト３", body: "タスクテスト本文３", status: 2, created_at: Time.current + 2.days)
-      @task = Task.create(title: "タスクテスト４", body: "タスクテスト本文４", status: 0, deadline: "2019-08-30", created_at: Time.current + 3.days)
+      @task = Task.create(title: "タスクテスト４", body: "タスクテスト本文４", status: 0, deadline: "2019-08-20", created_at: Time.current + 3.days)
     end
 
     scenario 'sorted by creation date in default', type: :system do
@@ -122,7 +122,7 @@ RSpec.describe 'Tasks', type: :system do
 
       4.times do |i|
         if (deadline_list[i+1] && deadline_list[i+1].text().present?)
-          expect(deadline_list[i].text()).to be < deadline_list[i+1].text()
+          expect(deadline_list[i].text()).to be <= deadline_list[i+1].text()
         end
       end
     end
@@ -140,7 +140,7 @@ RSpec.describe 'Tasks', type: :system do
 
       4.times do |i|
         if (deadline_list[i+1] && deadline_list[i].text().present?)
-          expect(deadline_list[i].text()).to be > deadline_list[i+1].text()
+          expect(deadline_list[i].text()).to be >= deadline_list[i+1].text()
         end
       end
     end
