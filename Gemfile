@@ -75,3 +75,6 @@ gem 'jquery-rails'
 gem 'enum_help'
 gem 'slim-rails'
 gem 'html2slim'
+gem "bootstrap4-datetime-picker-rails"
+gem 'momentjs-rails'
+gem "font-awesome-rails"
