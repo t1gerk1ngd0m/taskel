@@ -12,6 +12,18 @@
     width: 100%;
     margin-top: 50px;
   }
+  .column {
+    text-align: center;
+  }
+  tbody {
+    tr {
+      a {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
   &__task {
     width: 95%;
     margin: 0 auto 10px;
@@ -19,11 +31,6 @@
     padding: 20px;
   }
   &__task--title {
-    font-weight: bold;
-    font-size: 30px;
-  }
-  &__task--body {
-    font-size: 24px;
   }
   &__task--menu {
     list-style: none;

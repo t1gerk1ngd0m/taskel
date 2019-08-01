@@ -80,15 +80,6 @@ RSpec.describe 'Tasks', type: :system do
       @task = Task.create(title: "タスクテスト４", body: "タスクテスト本文４", status: 0, created_at: Time.current + 3.days)
     end
 
-    scenario 'succeed in task destruction in index page', type: :system do
-      visit root_path
-
-      first(".delete").click_on(I18n.t('buttons.delete'))
-
-      expect(page).to have_content("タスク一覧")
-      expect(page).to have_content(I18n.t('tasks.index.deleted'))
-    end
-
     scenario 'sorted by creation date', type: :system do
       visit root_path
       created_at = all(".task-index__task--created_at")
