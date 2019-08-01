@@ -12,9 +12,9 @@
           th scope="col"
             = t('activerecord.attributes.task.status')
           th scope="col"
-            = t('activerecord.attributes.task.deadline')
+            = sortable "deadline", t('activerecord.attributes.task.deadline')
           th scope="col"
-            = t('activerecord.attributes.task.created_at')
+            = sortable "created_at", t('activerecord.attributes.task.created_at')
       tbody.column
         - @tasks.each do |task|
           tr
