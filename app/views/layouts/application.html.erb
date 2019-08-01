@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Taskel</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <ul class="nav justify-content-end bg-dark">
+      <li class="nav-item">
+        <a class="nav-link logout" href="#">ログアウト</a>
+      </li>
+    </ul>
+    <div class="container">
+      <%= yield %>
+    </div>
+  </body>
+</html>

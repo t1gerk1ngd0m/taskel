@@ -23,7 +23,7 @@ RSpec.describe 'Tasks', type: :system do
       click_button I18n.t('buttons.create')
 
       expect(page).to have_content("タスク一覧")
-      expect(page).to have_content(I18n.t('tasks.index.saved'))
+      expect(page).to have_content("タスクを作成しました")
       expect(page).to ( 
         have_content(task.title) && have_content(task.body) && have_content(task.status_i18n)
       )
@@ -35,7 +35,7 @@ RSpec.describe 'Tasks', type: :system do
       click_button I18n.t('buttons.create')
 
       expect(page).to_not have_content("タスク一覧")
-      expect(page).to have_content(I18n.t('tasks.new.save_failed'))
+      expect(page).to have_content("タスクの作成に失敗しました")
     end
   end
 
@@ -54,7 +54,7 @@ RSpec.describe 'Tasks', type: :system do
       click_button I18n.t('buttons.update')
 
       expect(page).to have_content("タスク詳細")
-      expect(page).to have_content(I18n.t('tasks.show.edited'))
+      expect(page).to have_content("タスクを編集しました")
       expect(page).to (
         have_content(@task.title) && have_content(@task.body) && have_content(@task.status_i18n)
       )
@@ -67,7 +67,7 @@ RSpec.describe 'Tasks', type: :system do
       click_button I18n.t('buttons.update')
 
       expect(page).to_not have_content("タスク詳細")
-      expect(page).to have_content(I18n.t('tasks.edit.edit_failed'))
+      expect(page).to have_content("タスクの編集に失敗しました")
     end
   end
 
@@ -83,10 +83,10 @@ RSpec.describe 'Tasks', type: :system do
     scenario 'succeed in task destruction in index page', type: :system do
       visit root_path
 
-      first(".delete").click_on(I18n.t('buttons.delete'))
+      first(".delete").click_on('削除')
 
       expect(page).to have_content("タスク一覧")
-      expect(page).to have_content(I18n.t('tasks.index.deleted'))
+      expect(page).to have_content("タスクを削除しました")
     end
 
     scenario 'sorted by creation date', type: :system do
@@ -113,10 +113,10 @@ RSpec.describe 'Tasks', type: :system do
     scenario 'succeed in task destruction in show page', type: :system do
       visit task_path(id: @task.id)
 
-      click_on I18n.t('buttons.delete')
+      click_on '削除'
 
       expect(page).to have_content("タスク一覧")
-      expect(page).to have_content(I18n.t('tasks.index.deleted'))
+      expect(page).to have_content("タスクを削除しました")
     end
   end
 end
