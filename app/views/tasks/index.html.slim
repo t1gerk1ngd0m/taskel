@@ -2,11 +2,22 @@
   h1.task-index__title
     | タスク一覧
   = flash[:success]
+  .task-index__search
+    p タスクを検索する
+    = form_with(model: nil, scope: nil, url: search_tasks_path, method: 'get', local: true, class: 'input-group') do |f|
+      .form-inline
+        = f.label t('activerecord.attributes.task.title'), class: "sr-only"
+        = f.text_field :title, class: "form-control mb-2 mr-sm-2", placeholder: "タイトル"
+      .form-inline
+        = f.label t('activerecord.attributes.task.status'), class: "sr-only"
+        = f.select :status, Task.statuses_i18n.keys.map { |k| [Task.statuses_i18n[k], Task.statuses[k]]}, { include_blank: "---" }, class: "form-control mb-2 mr-sm-2"
+      span.btn.mb-2
+        = f.button "検索", type: "submit", class: "btn btn-default"
+          i.fa.fa-search
   .task-index__tasks
     table.table.table-striped.table-hover
       thead.column
         tr
-          th scope="col"  詳細
           th scope="col"
             = t('activerecord.attributes.task.title')
           th scope="col"
@@ -15,11 +26,10 @@
             = sortable "deadline", t('activerecord.attributes.task.deadline')
           th scope="col"
             = sortable "created_at", t('activerecord.attributes.task.created_at')
+          th scope="col"  詳細
       tbody.column
         - @tasks.each do |task|
           tr
-              th scope="row"
-                = link_to t('buttons.show'), task_path(task.id), method: :get
               td.task-index__task--title
                 = task.title
               td.task-index__task--status
@@ -29,3 +39,5 @@
                   = l(task.deadline, format: :default)
               td.task-index__task--created_at
                 = t task.created_at.to_s(:date_time)
+              th scope="row"
+                = link_to t('buttons.show'), task_path(task.id), method: :get
