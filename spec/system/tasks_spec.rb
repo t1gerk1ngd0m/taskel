@@ -84,9 +84,6 @@ RSpec.describe 'Tasks', type: :system do
     scenario 'sorted by creation date in default', type: :system do
       visit root_path
       created_at_list = all(".task-index__task--created_at")
-
-      expect(page).to have_content("タスク一覧")
-
       # i番目のデータの作成日時がi+1番目のデータの作成日時よりもあとであることを確認
       4.times do |i|
         if(created_at_list[i+1])
@@ -99,11 +96,7 @@ RSpec.describe 'Tasks', type: :system do
       visit root_path
       click_on I18n.t('activerecord.attributes.task.created_at')
       sleep 1
-
       created_at_list = all(".task-index__task--created_at")
-
-      expect(page).to have_content("タスク一覧")
-
       # i番目のデータの作成日時がi+1番目のデータの作成日時よりも前であることを確認
       4.times do |i|
         if(created_at_list[i+1])
@@ -116,11 +109,7 @@ RSpec.describe 'Tasks', type: :system do
       visit root_path
       click_on I18n.t('activerecord.attributes.task.deadline')
       sleep 1
-
       deadline_list = all(".task-index__task--deadline")
-      
-      expect(page).to have_content("タスク一覧")
-
       4.times do |i|
         if (deadline_list[i+1] && deadline_list[i+1].text().present?)
           expect(deadline_list[i].text()).to be <= deadline_list[i+1].text()
@@ -134,11 +123,7 @@ RSpec.describe 'Tasks', type: :system do
         click_on I18n.t('activerecord.attributes.task.deadline')
       end
       sleep 1
-
       deadline_list = all(".task-index__task--deadline")
-      
-      expect(page).to have_content("タスク一覧")
-
       4.times do |i|
         if (deadline_list[i+1] && deadline_list[i].text().present?)
           expect(deadline_list[i].text()).to be >= deadline_list[i+1].text()
