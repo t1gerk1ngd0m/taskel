@@ -74,9 +74,10 @@ RSpec.describe 'Tasks', type: :system do
   feature 'index page' do
 
     before do
-      @task = Task.create(title: "タスクテスト１", body: "タスクテスト本文１", status: 1, deadline: "2019-08-10")
-      @task = Task.create(title: "タスクテスト２", body: "タスクテスト本文２", status: 0, deadline: "2019-08-20", created_at: Time.current + 1.days)
-      @task = Task.create(title: "タスクテスト３", body: "タスクテスト本文３", status: 2, created_at: Time.current + 2.days)
+      priority_array = ['high', 'middle', 'low']
+      @task = Task.create(title: "タスクテスト１", body: "タスクテスト本文１", status: 1, deadline: "2019-08-10", priority: priority_array[0])
+      @task = Task.create(title: "タスクテスト２", body: "タスクテスト本文２", status: 0, deadline: "2019-08-20", priority: priority_array[1], created_at: Time.current + 1.days)
+      @task = Task.create(title: "タスクテスト３", body: "タスクテスト本文３", status: 2, priority: priority_array[2], created_at: Time.current + 2.days)
       @task = Task.create(title: "タスクテスト４", body: "タスクテスト本文４", status: 0, deadline: "2019-08-20", created_at: Time.current + 3.days)
     end
 
@@ -141,6 +142,30 @@ RSpec.describe 'Tasks', type: :system do
       4.times do |i|
         if (deadline_list[i+1] && deadline_list[i].text().present?)
           expect(deadline_list[i].text()).to be >= deadline_list[i+1].text()
+        end
+      end
+    end
+
+    scenario 'sorted by priority', type: :system do
+      priority_array = ['high', 'middle', 'low']
+      visit root_path
+      click_on I18n.t('activerecord.attributes.task.priority')
+      sleep 1
+      priority_list = all(".task-index__task--priority")
+      4.times do |i|
+        if priority_list[i].text().present?
+          binding.pry
+          expect(priority_list[i].text()).to have_content I18n.t("enums.task.priority.#{priority_array[2-i]}")
+        end
+      end
+
+      click_on I18n.t('activerecord.attributes.task.priority')
+      sleep 1
+      priority_list = all(".task-index__task--priority")
+      4.times do |i|
+        if priority_list[i].text().present?
+          binding.pry
+          expect(priority_list[i].text()).to have_content I18n.t("enums.task.priority.#{priority_array[i-1]}")
         end
       end
     end
