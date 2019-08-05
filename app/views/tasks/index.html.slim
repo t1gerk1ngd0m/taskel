@@ -2,7 +2,7 @@
   h1.task-index__title
     | タスク一覧
   = flash[:success]
-  = render 'form', url: search_tasks_path, method: 'get'
+  = render 'form', url: tasks_path, method: 'get'
   .task-index__tasks
     table.table.table-striped.table-hover
       thead.column
