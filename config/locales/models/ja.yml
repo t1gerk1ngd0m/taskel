@@ -11,9 +11,14 @@ ja:
         status: ステータス
         file: 添付ファイル
         created_at: 作成日時
+        priority: 優先順位
   enums:
     task:
       status:
         waiting: 未着手
         working: 着手
         finished: 完了
+      priority:
+        high: 高
+        middle: 中
+        low: 低
