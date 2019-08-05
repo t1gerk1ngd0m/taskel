@@ -12,6 +12,8 @@
           th scope="col"
             = t('activerecord.attributes.task.status')
           th scope="col"
+            = sortable "priority", t('activerecord.attributes.task.priority')
+          th scope="col"
             = sortable "deadline", t('activerecord.attributes.task.deadline')
           th scope="col"
             = sortable "created_at", t('activerecord.attributes.task.created_at')
@@ -23,6 +25,8 @@
                 = task.title
               td.task-index__task--status
                 = t task.status_i18n
+              td.task-index__task--priority
+                = t task.priority_i18n
               td.task-index__task--deadline
                 - if(task.deadline)
                   = l(task.deadline, format: :default)
