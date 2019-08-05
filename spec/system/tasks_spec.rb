@@ -149,7 +149,6 @@ RSpec.describe 'Tasks', type: :system do
       priority_list = all(".task-index__task--priority")
       4.times do |i|
         if priority_list[i].text().present?
-          binding.pry
           expect(priority_list[i].text()).to have_content I18n.t("enums.task.priority.#{priority_array[i-1]}")
         end
       end
