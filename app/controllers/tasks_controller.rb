@@ -68,7 +68,6 @@ class TasksController < ApplicationController
 
   # パラメーターとしてasc or descを返す
   def sort_direction
-    # %w[asc desc]の意味は？
     %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"
   end
 
