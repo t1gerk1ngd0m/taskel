@@ -144,6 +144,39 @@ RSpec.describe 'Tasks', type: :system do
         end
       end
     end
+
+    scenario 'searched by title only', type: :system do
+      visit root_path
+      # 検索成功時
+      fill_in I18n.t('activerecord.attributes.task.title'), with: "２"
+      find('#search').click
+      expect(page).to have_content("タスクテスト２")
+      # 検索失敗時
+      fill_in I18n.t('activerecord.attributes.task.title'), with: "タスクタスク"
+      find('#search').click
+      expect(page).to_not have_content("タスクテスト")
+    end
+
+    scenario 'searched by status only', type: :system do
+      visit root_path
+      select I18n.t('enums.task.status.working') ,from: "search-status"
+      find('#search').click
+      expect(page).to have_content("タスクテスト１")
+    end
+
+    scenario 'searched by title and status', type: :system do
+      visit root_path
+      # テスト成功時
+      fill_in I18n.t('activerecord.attributes.task.title'), with: "４"
+      select I18n.t('enums.task.status.waiting') ,from: "search-status"
+      find('#search').click
+      expect(page).to have_content("タスクテスト４")
+      # テスト失敗時
+      fill_in I18n.t('activerecord.attributes.task.title'), with: "４"
+      select I18n.t('enums.task.status.working') ,from: "search-status"
+      find('#search').click
+      expect(page).to_not have_content("タスクテスト")
+    end
   end
 
   feature 'show page' do
