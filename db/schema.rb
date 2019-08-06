@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2019_08_05_010422) do
     t.string "file"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "priority"
+    t.integer "priority", default: 0, null: false
     t.index ["title"], name: "index_tasks_on_title"
   end
 

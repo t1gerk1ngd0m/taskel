@@ -25,6 +25,6 @@
                i.fa.fa-calendar
       .form-group
         = f.label :priority, t('activerecord.attributes.task.priority')
-        = f.select :priority, Task.priorities_i18n.keys.map { |k| [Task.priorities_i18n[k], k]}, { include_blank: "---" }, class: "form-control"
+        = f.select :priority, Task.priorities_i18n.keys.map { |k| [Task.priorities_i18n[k], k]}, {}, class: "form-control"
         = render 'shared/validation_message', model: f.object, attributes: :priority
       = f.button t('buttons.create'), type: "submit", class: "btn btn-primary mb-2"
