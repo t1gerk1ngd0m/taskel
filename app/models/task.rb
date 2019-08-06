@@ -5,14 +5,21 @@ class Task < ApplicationRecord
 	validates :status, presence: true
 
 	def self.search(title, status)
-		# title,status共にblankでないとき（indexページ新規取得時）
 		if title.blank? && status.blank?
 			all
-		# statusで検索しないとき
 		elsif status.empty?
-			where('title Like(?)', "%#{title}%")
+			search_title(title)
 		elsif title && status
-			where('(title Like(?)) AND (status = ?)', "%#{title}%", status)
+			search_title(title).search_status(status)
 		end
+	end
+
+	private
+	def self.search_title(title)
+		where('title Like(?)', "%#{title}%")
+	end
+	
+	def self.search_status(status)
+		where('status = ?', status)
 	end
 end
