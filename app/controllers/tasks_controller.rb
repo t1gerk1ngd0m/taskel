@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @tasks = Task.all.order(sort_column + ' ' + sort_direction)
+    @tasks = Task.search(params[:title], params[:status]).order("tasks.#{sort_column} #{sort_direction}")
   end
 
   def new
@@ -40,7 +40,7 @@ class TasksController < ApplicationController
   def destroy
     if @task.destroy
       flash[:success] = t 'tasks.index.deleted'
-      redirect_to root_path      
+      redirect_to root_path
     else
       flash[:failed] = t 'tasks.show.delete_failed'
       render :show

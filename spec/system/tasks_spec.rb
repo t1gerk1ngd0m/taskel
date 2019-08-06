@@ -74,10 +74,10 @@ RSpec.describe 'Tasks', type: :system do
   feature 'index page' do
 
     before do
-      @task = Task.create(title: "タスクテスト１", body: "タスクテスト本文１", status: 1, deadline: "2019-08-10")
-      @task = Task.create(title: "タスクテスト２", body: "タスクテスト本文２", status: 0, deadline: "2019-08-20", created_at: Time.current + 1.days)
+      @task = Task.create(title: "タスクテスト１", body: "タスクテスト本文１", status: 1, deadline: Date.today + 10.days)
+      @task = Task.create(title: "タスクテスト２", body: "タスクテスト本文２", status: 0, deadline: Date.today + 20.days, created_at: Time.current + 1.days)
       @task = Task.create(title: "タスクテスト３", body: "タスクテスト本文３", status: 2, created_at: Time.current + 2.days)
-      @task = Task.create(title: "タスクテスト４", body: "タスクテスト本文４", status: 0, deadline: "2019-08-30", created_at: Time.current + 3.days)
+      @task = Task.create(title: "タスクテスト４", body: "タスクテスト本文４", status: 0, deadline: Date.today + 20.days, created_at: Time.current + 3.days)
     end
 
     scenario 'sorted by creation date in default', type: :system do
@@ -122,7 +122,7 @@ RSpec.describe 'Tasks', type: :system do
 
       4.times do |i|
         if (deadline_list[i+1] && deadline_list[i+1].text().present?)
-          expect(deadline_list[i].text()).to be < deadline_list[i+1].text()
+          expect(deadline_list[i].text()).to be <= deadline_list[i+1].text()
         end
       end
     end
@@ -140,9 +140,42 @@ RSpec.describe 'Tasks', type: :system do
 
       4.times do |i|
         if (deadline_list[i+1] && deadline_list[i].text().present?)
-          expect(deadline_list[i].text()).to be > deadline_list[i+1].text()
+          expect(deadline_list[i].text()).to be >= deadline_list[i+1].text()
         end
       end
+    end
+
+    scenario 'searched by title only', type: :system do
+      visit root_path
+      # 検索成功時
+      fill_in I18n.t('activerecord.attributes.task.title'), with: "２"
+      find('#search').click
+      expect(page).to have_content("タスクテスト２")
+      # 検索失敗時
+      fill_in I18n.t('activerecord.attributes.task.title'), with: "タスクタスク"
+      find('#search').click
+      expect(page).to_not have_content("タスクテスト")
+    end
+
+    scenario 'searched by status only', type: :system do
+      visit root_path
+      select I18n.t('enums.task.status.working') ,from: "search-status"
+      find('#search').click
+      expect(page).to have_content("タスクテスト１")
+    end
+
+    scenario 'searched by title and status', type: :system do
+      visit root_path
+      # テスト成功時
+      fill_in I18n.t('activerecord.attributes.task.title'), with: "４"
+      select I18n.t('enums.task.status.waiting') ,from: "search-status"
+      find('#search').click
+      expect(page).to have_content("タスクテスト４")
+      # テスト失敗時
+      fill_in I18n.t('activerecord.attributes.task.title'), with: "４"
+      select I18n.t('enums.task.status.working') ,from: "search-status"
+      find('#search').click
+      expect(page).to_not have_content("タスクテスト")
     end
   end
 
