@@ -74,11 +74,10 @@ RSpec.describe 'Tasks', type: :system do
   feature 'index page' do
 
     before do
-      priority_array = ['high', 'middle', 'low']
-      @task = Task.create(title: "タスクテスト１", body: "タスクテスト本文１", status: 1, deadline: "2019-08-10", priority: priority_array[0])
-      @task = Task.create(title: "タスクテスト２", body: "タスクテスト本文２", status: 0, deadline: "2019-08-20", priority: priority_array[1], created_at: Time.current + 1.days)
-      @task = Task.create(title: "タスクテスト３", body: "タスクテスト本文３", status: 2, priority: priority_array[2], created_at: Time.current + 2.days)
-      @task = Task.create(title: "タスクテスト４", body: "タスクテスト本文４", status: 0, deadline: "2019-08-20", created_at: Time.current + 3.days)
+      @task = Task.create(title: "タスクテスト１", body: "タスクテスト本文１", status: 1, deadline: Date.today + 10.days, priority: Task.priorities.key(2))
+      @task = Task.create(title: "タスクテスト２", body: "タスクテスト本文２", status: 0, deadline: Date.today + 20.days, priority: Task.priorities.key(1), created_at: Time.current + 1.days)
+      @task = Task.create(title: "タスクテスト３", body: "タスクテスト本文３", status: 2, priority: Task.priorities.key(0), created_at: Time.current + 2.days)
+      @task = Task.create(title: "タスクテスト４", body: "タスクテスト本文４", status: 0, deadline: Date.today + 20.days, created_at: Time.current + 3.days)
     end
 
     scenario 'sorted by creation date in default', type: :system do
@@ -132,14 +131,13 @@ RSpec.describe 'Tasks', type: :system do
     end
 
     scenario 'sorted by priority', type: :system do
-      priority_array = ['high', 'middle', 'low']
       visit root_path
       click_on I18n.t('activerecord.attributes.task.priority')
       sleep 1
       priority_list = all(".task-index__task--priority")
       4.times do |i|
         if priority_list[i].text().present?
-          expect(priority_list[i].text()).to have_content I18n.t("enums.task.priority.#{priority_array[2-i]}")
+          expect(priority_list[i].text()).to have_content I18n.t("enums.task.priority.#{Task.priorities.key(i)}")
         end
       end
 
@@ -148,9 +146,42 @@ RSpec.describe 'Tasks', type: :system do
       priority_list = all(".task-index__task--priority")
       4.times do |i|
         if priority_list[i].text().present?
-          expect(priority_list[i].text()).to have_content I18n.t("enums.task.priority.#{priority_array[i-1]}")
+          expect(priority_list[i].text()).to have_content I18n.t("enums.task.priority.#{Task.priorities.key(3-i)}")
         end
       end
+    end
+
+    scenario 'searched by title only', type: :system do
+      visit root_path
+      # 検索成功時
+      fill_in I18n.t('activerecord.attributes.task.title'), with: "２"
+      find('#search').click
+      expect(page).to have_content("タスクテスト２")
+      # 検索失敗時
+      fill_in I18n.t('activerecord.attributes.task.title'), with: "タスクタスク"
+      find('#search').click
+      expect(page).to_not have_content("タスクテスト")
+    end
+
+    scenario 'searched by status only', type: :system do
+      visit root_path
+      select I18n.t('enums.task.status.working') ,from: "search-status"
+      find('#search').click
+      expect(page).to have_content("タスクテスト１")
+    end
+
+    scenario 'searched by title and status', type: :system do
+      visit root_path
+      # テスト成功時
+      fill_in I18n.t('activerecord.attributes.task.title'), with: "４"
+      select I18n.t('enums.task.status.waiting') ,from: "search-status"
+      find('#search').click
+      expect(page).to have_content("タスクテスト４")
+      # テスト失敗時
+      fill_in I18n.t('activerecord.attributes.task.title'), with: "４"
+      select I18n.t('enums.task.status.working') ,from: "search-status"
+      find('#search').click
+      expect(page).to_not have_content("タスクテスト")
     end
   end
 
