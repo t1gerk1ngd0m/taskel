@@ -34,3 +34,4 @@
                 = t task.created_at.to_s(:date_time)
               th scope="row"
                 = link_to t('buttons.show'), task_path(task.id), method: :get
+  = paginate @tasks
