@@ -1,7 +1,5 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-  # helperが呼び出せるようにする
-  # application_helper以外でもここに書けば呼び出せる？
   helper_method :sort_column, :sort_direction
 
   def index
@@ -58,13 +56,10 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
 
-  # パラメーターとしてasc or descを返す
   def sort_direction
     %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"
   end
 
-  # ソートするカラムを選択する。最初はcreated_at
-  # column_namesメソッド
   def sort_column
     Task.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
   end
