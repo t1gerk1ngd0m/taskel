@@ -131,14 +131,13 @@ RSpec.describe 'Tasks', type: :system do
     end
 
     scenario 'sorted by priority', type: :system do
-      priority_array = Task.priorities
       visit root_path
       click_on I18n.t('activerecord.attributes.task.priority')
       sleep 1
       priority_list = all(".task-index__task--priority")
       4.times do |i|
         if priority_list[i].text().present?
-          expect(priority_list[i].text()).to have_content I18n.t("enums.task.priority.#{priority_array.key(i)}")
+          expect(priority_list[i].text()).to have_content I18n.t("enums.task.priority.#{Task.priorities.key(i)}")
         end
       end
 
@@ -147,7 +146,7 @@ RSpec.describe 'Tasks', type: :system do
       priority_list = all(".task-index__task--priority")
       4.times do |i|
         if priority_list[i].text().present?
-          expect(priority_list[i].text()).to have_content I18n.t("enums.task.priority.#{priority_array.key(3-i)}")
+          expect(priority_list[i].text()).to have_content I18n.t("enums.task.priority.#{Task.priorities.key(3-i)}")
         end
       end
     end
