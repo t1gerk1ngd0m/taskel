@@ -4,11 +4,13 @@ ja:
       task: タスク
     attributes:
       task:
+        id: ID
         title: タイトル
         body: 本文
         deadline: 納期
         status: ステータス
         file: 添付ファイル
+        created_at: 作成日時
   enums:
     task:
       status:
