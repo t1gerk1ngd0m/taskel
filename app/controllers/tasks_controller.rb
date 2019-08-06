@@ -49,14 +49,6 @@ class TasksController < ApplicationController
     end
   end
 
-  # def search
-  #   if params[:status].blank?
-  #     @tasks = Task.where('title LIKE(?)', "%#{params[:title]}%")
-  #   else
-  #     @tasks = Task.where('(title LIKE(?)) AND (status = ?)', "%#{params[:title]}%", params[:status])
-  #   end
-  # end
-
   private
   def task_params
     params.require(:task).permit(:title, :body, :status, :deadline, :file)
@@ -68,7 +60,6 @@ class TasksController < ApplicationController
 
   # パラメーターとしてasc or descを返す
   def sort_direction
-    # %w[asc desc]の意味は？
     %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"
   end
 
