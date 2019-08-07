@@ -4,6 +4,7 @@ class Task < ApplicationRecord
 	validates :title, presence: true
 	validates :body, presence: true
 	validates :status, presence: true
+	validates :priority, presence: true
 
 	def self.search(title, status)
 		# title,status共にblankでないとき（indexページ新規取得時）
