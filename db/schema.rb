@@ -27,4 +27,13 @@ ActiveRecord::Schema.define(version: 2019_08_05_010422) do
     t.index ["title"], name: "index_tasks_on_title"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "password_digest", null: false
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
 end
