@@ -12,6 +12,12 @@ ja:
         file: 添付ファイル
         created_at: 作成日時
         priority: 優先順位
+        user_id: 作成者
+      user:
+        name: ユーザー名
+        email: メールアドレス
+        password: パスワード
+        image: ユーザー画像
   enums:
     task:
       status:
