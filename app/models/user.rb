@@ -2,21 +2,21 @@ class User < ApplicationRecord
   has_secure_password
   has_many :tasks
 
-  reg_mail_address = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  reg_mail_password = /\A[a-z\d]{6,}+\z/i
+  REG_MAIL_ADDRESS = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  REG_PASSWORD = /\A[a-z\d]{6,}+\z/i
 
   validates :name,
     presence: true
   validates :email,
     presence: true,
     uniqueness: true,
-    format: { with: reg_mail_address,
+    format: { with: REG_MAIL_ADDRESS,
               message: I18n.t("errors.users.email")
             }
   validates :password_digest,
     presence: true,
     confirmation: true,
-    format: { with: reg_mail_password,
+    format: { with: REG_PASSWORD,
               message: I18n.t("errors.users.password")
             }
 end
