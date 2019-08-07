@@ -155,13 +155,15 @@ RSpec.describe 'Tasks', type: :system do
       end
     end
 
-    scenario 'searched by title only', type: :system do
+    scenario 'suceeded in searching by title only', type: :system do
       visit root_path
-      # 検索成功時
       fill_in I18n.t('activerecord.attributes.task.title'), with: "２"
       find('#search').click
       expect(page).to have_content("タスクテスト２")
-      # 検索失敗時
+    end
+
+    scenario 'failed in searching by title only', type: :system do
+      visit root_path
       fill_in I18n.t('activerecord.attributes.task.title'), with: "タスクタスク"
       find('#search').click
       expect(page).to_not have_content("タスクテスト")
@@ -176,12 +178,14 @@ RSpec.describe 'Tasks', type: :system do
 
     scenario 'searched by title and status', type: :system do
       visit root_path
-      # テスト成功時
       fill_in I18n.t('activerecord.attributes.task.title'), with: "４"
       select I18n.t('enums.task.status.waiting') ,from: "search-status"
       find('#search').click
       expect(page).to have_content("タスクテスト４")
-      # テスト失敗時
+    end
+
+    scenario 'searched by title and status', type: :system do
+      visit root_path
       fill_in I18n.t('activerecord.attributes.task.title'), with: "４"
       select I18n.t('enums.task.status.working') ,from: "search-status"
       find('#search').click
