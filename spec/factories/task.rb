@@ -5,5 +5,6 @@ FactoryBot.define do
     deadline    {'2019-08-09'}
     status      {1}
     file        {"aaaaa"}
+    priority    {0}
   end
 end

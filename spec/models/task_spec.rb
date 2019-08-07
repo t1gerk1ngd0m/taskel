@@ -19,7 +19,12 @@ describe Task, type: :model do
       task.valid?
       expect(task.errors[:status]).to include("を入力してください")
     end
-    it "is valid with a title, body, status" do
+    it "is invalid without a priority" do
+      task = build(:task, priority: "")
+      task.valid?
+      expect(task.errors[:priority]).to include("を入力してください")
+    end
+    it "is valid with a title, body, status, priority" do
       task = build(:task, deadline: "", file: "")
       task.valid?
       expect(task).to be_valid
