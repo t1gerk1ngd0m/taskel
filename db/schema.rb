@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2019_08_07_062330) do
     t.string "name", null: false
     t.string "email", null: false
     t.string "password_digest", null: false
+    t.string "remember_token"
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

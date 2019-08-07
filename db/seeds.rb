@@ -34,6 +34,6 @@ end
     priority: priority,
     created_at: created_at,
     updated_at: created_at,
-    user_id: rand(10)
+    user_id: rand(1..10)
   )
 end
