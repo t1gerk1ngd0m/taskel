@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/stympy/faker.git
+  revision: b3fe778350b627df96f68f4ee9c5978473173300
+  branch: master
+  specs:
+    faker (2.1.0)
+      i18n (>= 0.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -49,6 +57,7 @@ GEM
     arel (9.0.0)
     autoprefixer-rails (9.6.1)
       execjs
+    bcrypt (3.1.12)
     bindex (0.8.1)
     bootsnap (1.4.4)
       msgpack (~> 1.0)
@@ -284,6 +293,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.3.1)
   bootstrap4-datetime-picker-rails
@@ -294,6 +304,7 @@ DEPENDENCIES
   dotenv-rails
   enum_help
   factory_bot_rails
+  faker!
   font-awesome-rails
   html2slim
   jbuilder (~> 2.5)
