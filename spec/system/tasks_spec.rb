@@ -50,7 +50,7 @@ RSpec.describe 'Tasks', type: :system do
 
       fill_in I18n.t('activerecord.attributes.task.title'), with: @task.title
       fill_in I18n.t('activerecord.attributes.task.body'), with: @task.body
-      select @task.status ,from: I18n.t('activerecord.attributes.task.status')
+      select @task.status_i18n ,from: I18n.t('activerecord.attributes.task.status')
       click_button I18n.t('buttons.update')
 
       expect(page).to have_content("タスク詳細")
