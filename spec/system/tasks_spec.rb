@@ -10,7 +10,8 @@ RSpec.describe 'Tasks', type: :system do
     given(:task) { Task.create(
       title: "タスクタイトル",
       body: "タスク本文",
-      status: 0
+      status: 0,
+      priority: 1,
     ) }
 
     scenario 'succeed in task creation', type: :system do
@@ -19,13 +20,14 @@ RSpec.describe 'Tasks', type: :system do
       fill_in I18n.t('activerecord.attributes.task.title'), with: task.title
       fill_in I18n.t('activerecord.attributes.task.body'), with: task.body
       select task.status_i18n ,from: I18n.t('activerecord.attributes.task.status')
+      select task.priority_i18n ,from: I18n.t('activerecord.attributes.task.priority')
 
       click_button I18n.t('buttons.create')
 
       expect(page).to have_content("タスク一覧")
       expect(page).to have_content(I18n.t('tasks.index.saved'))
       expect(page).to ( 
-        have_content(task.title) && have_content(task.body) && have_content(task.status_i18n)
+        have_content(task.title) && have_content(task.body) && have_content(task.status_i18n) && have_content(task.priority_i18n)
       )
     end
 
@@ -42,7 +44,7 @@ RSpec.describe 'Tasks', type: :system do
   feature 'edit page' do
 
     before do
-      @task = Task.create(title: "タスクテスト", body: "タスクテスト本文", status: 1)
+      @task = Task.create(title: "タスクテスト", body: "タスクテスト本文", status: 1, priority: 2)
     end
 
     scenario 'succeed in task editation', type: :system do
@@ -51,12 +53,13 @@ RSpec.describe 'Tasks', type: :system do
       fill_in I18n.t('activerecord.attributes.task.title'), with: @task.title
       fill_in I18n.t('activerecord.attributes.task.body'), with: @task.body
       select @task.status_i18n ,from: I18n.t('activerecord.attributes.task.status')
+      select @task.priority_i18n ,from: I18n.t('activerecord.attributes.task.priority')
       click_button I18n.t('buttons.update')
 
       expect(page).to have_content("タスク詳細")
       expect(page).to have_content(I18n.t('tasks.show.edited'))
       expect(page).to (
-        have_content(@task.title) && have_content(@task.body) && have_content(@task.status_i18n)
+        have_content(@task.title) && have_content(@task.body) && have_content(@task.status_i18n) && have_content(@task.priority_i18n)
       )
     end
 
@@ -77,7 +80,7 @@ RSpec.describe 'Tasks', type: :system do
       @task = Task.create(title: "タスクテスト１", body: "タスクテスト本文１", status: 1, deadline: Date.today + 10.days, priority: Task.priorities.key(2))
       @task = Task.create(title: "タスクテスト２", body: "タスクテスト本文２", status: 0, deadline: Date.today + 20.days, priority: Task.priorities.key(1), created_at: Time.current + 1.days)
       @task = Task.create(title: "タスクテスト３", body: "タスクテスト本文３", status: 2, priority: Task.priorities.key(0), created_at: Time.current + 2.days)
-      @task = Task.create(title: "タスクテスト４", body: "タスクテスト本文４", status: 0, deadline: Date.today + 20.days, created_at: Time.current + 3.days)
+      @task = Task.create(title: "タスクテスト４", body: "タスクテスト本文４", status: 0, deadline: Date.today + 20.days, priority: Task.priorities.key(0), created_at: Time.current + 3.days)
     end
 
     scenario 'sorted by creation date in default', type: :system do
@@ -131,13 +134,14 @@ RSpec.describe 'Tasks', type: :system do
     end
 
     scenario 'sorted by priority', type: :system do
+      priority_hash = Task.priorities_i18n.keys.map { |k| [Task.priorities_i18n[k], Task.priorities[k]]}.to_h
       visit root_path
       click_on I18n.t('activerecord.attributes.task.priority')
       sleep 1
       priority_list = all(".task-index__task--priority")
       4.times do |i|
-        if priority_list[i].text().present?
-          expect(priority_list[i].text()).to have_content I18n.t("enums.task.priority.#{Task.priorities.key(i)}")
+        if priority_list[i+1]
+          expect(priority_hash[priority_list[i].text()]).to be <= priority_hash[priority_list[i+1].text()]
         end
       end
 
@@ -145,8 +149,8 @@ RSpec.describe 'Tasks', type: :system do
       sleep 1
       priority_list = all(".task-index__task--priority")
       4.times do |i|
-        if priority_list[i].text().present?
-          expect(priority_list[i].text()).to have_content I18n.t("enums.task.priority.#{Task.priorities.key(3-i)}")
+        if priority_list[i+1]
+          expect(priority_hash[priority_list[i].text()]).to be >= priority_hash[priority_list[i+1].text()]
         end
       end
     end
@@ -188,7 +192,7 @@ RSpec.describe 'Tasks', type: :system do
   feature 'show page' do
 
     before do
-      @task = Task.create(title: "タスクテスト", body: "タスクテスト本文", status: 1)
+      @task = Task.create(title: "タスクテスト", body: "タスクテスト本文", status: 1, priority: 0)
     end
 
     scenario 'succeed in task destruction in show page', type: :system do
