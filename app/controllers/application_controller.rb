@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   def current_user
     remember_token = User.encrypt(cookies[:user_remember_token])
     @current_user = User.find_by(remember_token: remember_token) if @current_user.blank?
+    return @current_user
   end
 
   def sign_in(user)
@@ -22,7 +23,7 @@ class ApplicationController < ActionController::Base
   end
 
   def signed_in?
-    @current_user.present?
+    current_user.present?
   end
 
   private
