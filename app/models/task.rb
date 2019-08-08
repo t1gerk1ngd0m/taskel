@@ -19,4 +19,8 @@ class Task < ApplicationRecord
 			where('(title Like(?)) AND (status = ?)', "%#{title}%", status)
 		end
 	end
+
+	def self.own_task(user)
+		where('user_id = ?', user.id)
+	end
 end
