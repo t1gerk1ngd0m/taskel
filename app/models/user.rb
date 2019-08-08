@@ -9,7 +9,7 @@ class User < ApplicationRecord
     presence: true
   validates :email,
     presence: true,
-    uniqueness: true,
+    uniqueness: { allow_blank: true },
     format: { with: REG_MAIL_ADDRESS,
               message: I18n.t("errors.users.email"),
               allow_blank: true
