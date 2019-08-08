@@ -10,7 +10,9 @@ html
   body
     ul.nav.justify-content-end.bg-dark
       li.nav-item
-        a.nav-link.logout[href="#"]
-          | ログアウト
+        - if signed_in?
+          = link_to "ログアウト", logout_path, method: :delete, class: "logout nav-link"
+        - else
+          = link_to "ログイン", login_path, method: :get, class: "login nav-link"
     .container
       = yield
