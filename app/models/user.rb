@@ -11,12 +11,14 @@ class User < ApplicationRecord
     presence: true,
     uniqueness: true,
     format: { with: REG_MAIL_ADDRESS,
-              message: I18n.t("errors.users.email")
+              message: I18n.t("errors.users.email"),
+              allow_blank: true
             }
   validates :password_digest,
     presence: true,
     confirmation: true,
     format: { with: REG_PASSWORD,
-              message: I18n.t("errors.users.password")
+              message: I18n.t("errors.users.password"),
+              allow_blank: true
             }
 end
