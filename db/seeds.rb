@@ -9,12 +9,12 @@
 10.times do |n|
   name = Faker::Name.name
   email = Faker::Internet.email
-  password_digest = Faker::Internet.password(min_length: 6)
+  password = Faker::Internet.password(min_length: 6)
 
   User.create(
     name: name, 
     email: email, 
-    password_digest: password_digest
+    password: password
   )
 end
 
