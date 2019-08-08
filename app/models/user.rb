@@ -14,7 +14,7 @@ class User < ApplicationRecord
               message: I18n.t("errors.users.email"),
               allow_blank: true
             }
-  validates :password_digest,
+  validates :password,
     presence: true,
     confirmation: true,
     format: { with: REG_PASSWORD,
