@@ -44,6 +44,7 @@ group :development, :test do
   gem 'pry-doc'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
+  gem 'database_cleaner'
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem 'webdrivers'
