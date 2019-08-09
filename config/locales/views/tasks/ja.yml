@@ -10,6 +10,12 @@ ja:
       delete_failed: 'タスクの削除に失敗しまし'
     edit:
       edit_failed: 'タスクの編集に失敗しました'
+  sessions:
+    login:
+      success: 'ログインしました'
+      failed: 'ログインできませんでした'
+    logout:
+      success: 'ログアウトしました'
   buttons:
     create: 作成する
     update: 更新する

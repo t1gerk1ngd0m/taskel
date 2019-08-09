@@ -8,9 +8,10 @@ class SessionsController < ApplicationController
   def create
     if @user.authenticate(session_params[:password])
       sign_in(@user)
+      flash[:success] = t 'sessions.login.success'
       redirect_to root_path
     else
-      flash.now[:danger] = t('.flash.invalid_password')
+      flash[:failed] = t 'sessions.login.failed'
       render 'new'
     end
 
@@ -18,6 +19,7 @@ class SessionsController < ApplicationController
 
   def destroy
     sign_out
+    flash[:success] = t 'sessions.logout.success'
     redirect_to login_path
   end
 
@@ -25,7 +27,7 @@ class SessionsController < ApplicationController
     def set_user
       @user = User.find_by!(email: session_params[:email])
     rescue
-      flash.now[:danger] = t('.flash.invalid_email')
+      flash[:failed] = t 'sessions.login.failed'
       render action: 'new'
     end
 
