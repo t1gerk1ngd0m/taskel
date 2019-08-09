@@ -1,6 +1,5 @@
 module ApplicationHelper
   def sortable(column, title = nil)
-    # title ||= column.titleize
     title = column.titleize if title.blank?
     # 並べ替え元のカラム名のリンクのcssクラスとして、並び替え順に合わせてcurrent ascまたはcurrent descを付与する
     css_class = (column == sort_column) ? "current #{sort_direction}" : nil
