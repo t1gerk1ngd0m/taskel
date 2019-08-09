@@ -20,5 +20,6 @@ class User < ApplicationRecord
     format: { with: REG_PASSWORD,
               message: I18n.t("errors.users.password"),
               allow_blank: true
-            }
+            },
+    allow_nil: true
 end
