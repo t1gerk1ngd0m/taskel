@@ -15,8 +15,8 @@ RSpec.describe 'Tasks', type: :system do
     given(:task) { create(:task,
       title: "タスクタイトル",
       body: "タスク本文",
-      status: 0,
-      priority: 1,
+      status: Task.statuses.key(0),
+      priority: Task.priorities.key(1),
     ) }
 
     scenario 'succeed in task creation', type: :system do
@@ -49,7 +49,13 @@ RSpec.describe 'Tasks', type: :system do
   feature 'edit page' do
 
     before do
-      @task = create(:task, title: "タスクテスト", body: "タスクテスト本文", status: 1, priority: 2, user_id: @user.id)
+      @task = Task.create(
+        title: "タスクテスト", 
+        body: "タスクテスト本文", 
+        status: Task.statuses.key(1), 
+        priority: Task.priorities.key(2),
+        user_id: @user.id
+      )
     end
 
     scenario 'succeed in task editation', type: :system do
@@ -82,11 +88,40 @@ RSpec.describe 'Tasks', type: :system do
   feature 'index page' do
 
     before do
-      @task = create(:task, title: "タスクテスト１", body: "タスクテスト本文１", status: 1, deadline: Date.today + 10.days, priority: Task.priorities.key(2), user_id: @user.id)
-      @task = create(:task, title: "タスクテスト２", body: "タスクテスト本文２", status: 0, deadline: Date.today + 20.days, priority: Task.priorities.key(1), created_at: Time.current + 1.days, user_id: @user.id)
-      @task = create(:task, title: "タスクテスト３", body: "タスクテスト本文３", status: 2, priority: Task.priorities.key(0), created_at: Time.current + 2.days, user_id: @user.id)
-      @task = create(:task, title: "タスクテスト４", body: "タスクテスト本文４", status: 0, deadline: Date.today + 20.days, priority: Task.priorities.key(0), created_at: Time.current + 3.days, user_id: @user.id)
-      puts "インスタンスを作成しました"
+      @task = Task.create(
+        title: "タスクテスト１", 
+        body: "タスクテスト本文１", 
+        status: Task.statuses["working"], 
+        deadline: Date.today + 10.days, 
+        priority: Task.priorities["high"],
+        user_id: @user.id
+      )
+      @task = Task.create(
+        title: "タスクテスト２", 
+        body: "タスクテスト本文２", 
+        status: Task.statuses["waiting"], 
+        deadline: Date.today + 20.days, 
+        priority: Task.priorities["middle"], 
+        created_at: Time.current + 1.days,
+        user_id: @user.id
+      )
+      @task = Task.create(
+        title: "タスクテスト３", 
+        body: "タスクテスト本文３", 
+        status: Task.statuses["finished"], 
+        priority: Task.priorities["low"], 
+        created_at: Time.current + 2.days,
+        user_id: @user.id
+      )
+      @task = Task.create(
+        title: "タスクテスト４", 
+        body: "タスクテスト本文４", 
+        status: Task.statuses["waiting"], 
+        deadline: Date.today + 20.days, 
+        priority: Task.priorities["low"], 
+        created_at: Time.current + 3.days,
+        user_id: @user.id
+      )
     end
 
     scenario 'sorted by creation date in default', type: :system do
@@ -202,7 +237,13 @@ RSpec.describe 'Tasks', type: :system do
   feature 'show page' do
 
     before do
-      @task = create(:task, title: "タスクテスト", body: "タスクテスト本文", status: 1, priority: 0, user_id: @user.id)
+      @task = Task.create(
+        title: "タスクテスト", 
+        body: "タスクテスト本文", 
+        status: Task.statuses.key(1), 
+        priority: Task.priorities.key(0),
+        user_id: @user.id
+      )
     end
 
     scenario 'succeed in task destruction in show page', type: :system do

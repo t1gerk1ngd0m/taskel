@@ -80,3 +80,6 @@ gem "bootstrap4-datetime-picker-rails"
 gem 'momentjs-rails'
 gem "font-awesome-rails"
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+gem 'kaminari', '~> 0.17.0'
+gem 'kaminari-bootstrap'
+gem 'bootstrap-sass'

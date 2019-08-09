@@ -8,7 +8,7 @@ describe User, type: :model do
       it "is invalid without a name" do
         user = build(:user, name: "")
         user.valid?
-        expect(user.errors[:name]).to include("を入力してください")
+        expect(user.errors[:name]).to include I18n.t('errors.messages.blank')
       end
     end
 
@@ -16,34 +16,19 @@ describe User, type: :model do
       it "is invalid without a email" do
         user = build(:user, email: "")
         user.valid?
-        expect(user.errors[:email]).to include("を入力してください")
+        expect(user.errors[:email]).to include I18n.t('errors.messages.blank')
       end
       it "is invalid with a duplicate email address" do
         same_email = "aaaaa@gmail.com"
         user = create(:user, email: same_email)
         another_user = build(:user, email: same_email)
         another_user.valid?
-        expect(another_user.errors[:email]).to include("はすでに存在します")
+        expect(another_user.errors[:email]).to include I18n.t('errors.messages.uniqueness')
       end
       it "is invalid with a email not includes @ " do
         user = build(:user, email: "aaaaa")
         user.valid?
-        expect(user.errors[:email]).to include("不正なメールアドレスです")
-      end
-      it "is invalid with a email includes no character before @ " do
-        user = build(:user, email: "@aaa.com")
-        user.valid?
-        expect(user.errors[:email]).to include("不正なメールアドレスです")
-      end
-      it "is invalid with a email includes no character after @ " do
-        user = build(:user, email: "aaaa@")
-        user.valid?
-        expect(user.errors[:email]).to include("不正なメールアドレスです")
-      end
-      it "is invalid with a email includes non-alphanumeric characters " do
-        user = build(:user, email: "aaあa@aaa.com")
-        user.valid?
-        expect(user.errors[:email]).to include("不正なメールアドレスです")
+        expect(user.errors[:email]).to include I18n.t('errors.users.email')
       end
     end
 
@@ -51,18 +36,18 @@ describe User, type: :model do
       it "is invalid without a password" do
         user = build(:user, password: "")
         user.valid?
-        expect(user.errors[:password]).to include("を入力してください")
+        expect(user.errors[:password]).to include I18n.t('errors.messages.blank')
       end
       it "is invalid without a password_confirmation although with a password" do
         user = build(:user, password_confirmation: "")
         user.valid?
-        expect(user.errors[:password_confirmation]).to include("とパスワードの入力が一致しません")
+        expect(user.errors[:password_confirmation]).to include I18n.t('errors.users.confirmation')
       end
       it "is invalid with a password that has less than 5 characters" do
         pass_chara_five = "aaaaa"
         user = build(:user, password: pass_chara_five, password_confirmation: pass_chara_five)
         user.valid?
-        expect(user.errors[:password]).to include("6文字以上の半角英数字で入力してください")
+        expect(user.errors[:password]).to include I18n.t('errors.users.password')
       end
     end
 
