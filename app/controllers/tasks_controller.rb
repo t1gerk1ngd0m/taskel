@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @tasks = Task.own_task(current_user).search(params[:title], params[:status]).order("tasks.#{sort_column} #{sort_direction}").page(params[:page])
+    @tasks = current_user.tasks.search(search_params).order("tasks.#{sort_column} #{sort_direction}").page(params[:page])
   end
 
   def new
@@ -54,9 +54,12 @@ class TasksController < ApplicationController
       :body, 
       :status, 
       :deadline, 
-      :file, 
       :priority
     ).merge(user_id: current_user.id)
+  end
+
+  def search_params
+    params.permit(:title, :status)
   end
 
   def set_task

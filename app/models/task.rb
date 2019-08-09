@@ -8,19 +8,15 @@ class Task < ApplicationRecord
 	validates :status, presence: true
 	validates :priority, presence: true
 
-	def self.search(title, status)
+	def self.search(params)
 		# title,status共にblankでないとき（indexページ新規取得時）
-		if title.blank? && status.blank?
+		if params[:title].blank? && params[:status].blank?
 			all
 		# statusで検索しないとき
-		elsif status.empty?
-			where('title Like(?)', "%#{title}%")
-		elsif title && status
-			where('(title Like(?)) AND (status = ?)', "%#{title}%", status)
+		elsif params[:status].empty?
+			where('title Like(?)', "%#{params[:title]}%")
+		elsif params[:title] && params[:status]
+			where('(title Like(?)) AND (status = ?)', "%#{params[:title]}%", params[:status])
 		end
-	end
-
-	def self.own_task(user)
-		where('user_id = ?', user.id)
 	end
 end
