@@ -7,22 +7,22 @@ describe Task, type: :model do
     it "is invalid without a title" do
       task = build(:task, title: "")
       task.valid?
-      expect(task.errors[:title]).to include("を入力してください")
+      expect(task.errors[:title]).to include I18n.t('errors.messages.blank')
     end
     it "is invalid without a body" do
       task = build(:task, body: "")
       task.valid?
-      expect(task.errors[:body]).to include("を入力してください")
+      expect(task.errors[:body]).to include I18n.t('errors.messages.blank')
     end
     it "is invalid without a status" do
       task = build(:task, status: "")
       task.valid?
-      expect(task.errors[:status]).to include("を入力してください")
+      expect(task.errors[:status]).to include I18n.t('errors.messages.blank')
     end
     it "is invalid without a priority" do
       task = build(:task, priority: "")
       task.valid?
-      expect(task.errors[:priority]).to include("を入力してください")
+      expect(task.errors[:priority]).to include I18n.t('errors.messages.blank')
     end
     it "is valid with a title, body, status, priority" do
       task = build(:task, deadline: "", file: "")
@@ -31,7 +31,6 @@ describe Task, type: :model do
     end
   end
 
-  # 検索のテスト
   describe 'search tasks' do
     # before doでセットした値がなぜか各contextでセットされていないので一旦コメントアウト
     # before do
