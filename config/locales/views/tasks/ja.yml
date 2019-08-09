@@ -20,3 +20,10 @@ ja:
     default: ! '%Y/%m/%d'
     long: ! '%Y年%m月%d日(%a)'
     short: ! '%m/%d'
+  views:
+    pagination:
+      first: "&laquo;"
+      last: "&raquo;"
+      previous: "&lsaquo;"
+      next: "&rsaquo;"
+      truncate: "..."
