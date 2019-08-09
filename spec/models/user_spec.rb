@@ -30,21 +30,6 @@ describe User, type: :model do
         user.valid?
         expect(user.errors[:email]).to include("不正なメールアドレスです")
       end
-      it "is invalid with a email includes no character before @ " do
-        user = build(:user, email: "@aaa.com")
-        user.valid?
-        expect(user.errors[:email]).to include("不正なメールアドレスです")
-      end
-      it "is invalid with a email includes no character after @ " do
-        user = build(:user, email: "aaaa@")
-        user.valid?
-        expect(user.errors[:email]).to include("不正なメールアドレスです")
-      end
-      it "is invalid with a email includes non-alphanumeric characters " do
-        user = build(:user, email: "aaあa@aaa.com")
-        user.valid?
-        expect(user.errors[:email]).to include("不正なメールアドレスです")
-      end
     end
 
     context 'password' do
