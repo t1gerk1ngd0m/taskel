@@ -8,11 +8,18 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    ul.nav.justify-content-end.bg-dark
-      li.nav-item
-        - if signed_in?
-          = link_to "ログアウト", logout_path, method: :delete, class: "logout nav-link"
-        - else
-          = link_to "ログイン", login_path, method: :get, class: "login nav-link"
+    ul.nav.justify-content-end.bg-primary
+      - if signed_in?
+        li.nav-item
+          .nav-link
+            = link_to I18n.t('buttons.new'), "/tasks/new", method: :get, class: "color-white"
+        li.nav-item
+          .nav-link.color-white
+            = @current_user.name
+        li.nav-item
+          = link_to I18n.t('buttons.logout'), logout_path, method: :delete, class: "color-white logout nav-link"
+      - else
+        li.nav-item
+          = link_to I18n.t('buttons.login'), login_path, method: :get, class: "color-white login nav-link"
     .container
       = yield

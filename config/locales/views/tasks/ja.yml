@@ -16,6 +16,9 @@ ja:
     show: 詳細
     edit: 編集
     delete: 削除
+    new: タスクを作成する
+    login: ログイン
+    logout: ログアウト
   date:
     default: ! '%Y/%m/%d'
     long: ! '%Y年%m月%d日(%a)'
