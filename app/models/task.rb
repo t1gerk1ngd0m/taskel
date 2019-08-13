@@ -10,8 +10,8 @@ class Task < ApplicationRecord
 
   def self.search(params)
     search_record = self.all
-    search_record = a_record.search_title(params[:title]) if params[:title].present?
-    search_record = a_record.search_status(params[:status]) if params[:status].present?
+    search_record = search_record.search_title(params[:title]) if params[:title].present?
+    search_record = search_record.search_status(params[:status]) if params[:status].present?
     search_record
   end
 
