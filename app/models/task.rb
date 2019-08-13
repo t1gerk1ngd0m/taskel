@@ -23,4 +23,4 @@ class Task < ApplicationRecord
   def self.search_status(status)
     where('status = ?', status)
   end
-  end
+end
