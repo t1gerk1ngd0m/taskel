@@ -9,13 +9,10 @@ class Task < ApplicationRecord
   validates :priority, presence: true
 
   def self.search(params)
-    if params[:title].blank? && params[:status].blank?
-      all
-    elsif params[:status].empty?
-      search_title(params[:title])
-    elsif params[:title] && params[:status]
-      search_title(params[:title]).search_status(params[:status])
-    end
+    search_record = self.all
+    search_record = a_record.search_title(params[:title]) if params[:title].present?
+    search_record = a_record.search_status(params[:status]) if params[:status].present?
+    search_record
   end
 
   private
