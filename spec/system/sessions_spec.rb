@@ -7,13 +7,7 @@ RSpec.describe 'Sessions', type: :system do
     end
 
     scenario 'succeed in login', type: :system do
-      visit login_path
-
-      fill_in I18n.t('activerecord.attributes.user.email'), with: @user.email
-      fill_in I18n.t('activerecord.attributes.user.password'), with: @user.password
-
-      click_button I18n.t('buttons.login')
-
+      login(@user)
       expect(page).to have_content("タスク一覧")
       expect(page).to have_content(I18n.t('sessions.login.success'))
       expect(page).to have_content(@user.name)
@@ -21,10 +15,8 @@ RSpec.describe 'Sessions', type: :system do
 
     scenario 'fail in login', type: :system do
       visit login_path
-
       fill_in I18n.t('activerecord.attributes.user.email'), with: @user.password
       fill_in I18n.t('activerecord.attributes.user.password'), with: ""
-
       click_button I18n.t('buttons.login')
 
       expect(page).to have_content("ログイン画面")
@@ -35,10 +27,7 @@ RSpec.describe 'Sessions', type: :system do
   feature 'logout' do
     before do
       @user = create(:user)
-      visit login_path
-      fill_in I18n.t('activerecord.attributes.user.email'), with: @user.email
-      fill_in I18n.t('activerecord.attributes.user.password'), with: @user.password
-      click_button I18n.t('buttons.login')
+      login(@user)
     end
 
     scenario 'succeed in logout', type: :system do

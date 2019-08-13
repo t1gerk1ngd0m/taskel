@@ -4,10 +4,7 @@ RSpec.describe 'Tasks', type: :system do
 
   before do
     @user = create(:user)
-    visit login_path
-    fill_in I18n.t('activerecord.attributes.user.email'), with: @user.email
-    fill_in I18n.t('activerecord.attributes.user.password'), with: @user.password
-    click_button I18n.t('buttons.login')
+    login(@user)
   end
 
   feature 'new page' do

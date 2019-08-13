@@ -50,7 +50,8 @@ describe Task, type: :model do
         task3 = create(:task, title: "task_3", status: 'finished')
         task4 = create(:task, title: "taskb_4", status: 'finished')
         task5 = create(:task, title: "task_5", status: 'working')
-        expect(Task.search("task_", "")).to include(task2, task3, task5)
+        params = { title: "task_", status: "" }
+        expect(Task.search(params)).to include(task2, task3, task5)
       end
     end
 
@@ -63,7 +64,8 @@ describe Task, type: :model do
         task3 = create(:task, title: "task_3", status: 'finished')
         task4 = create(:task, title: "taskb_4", status: 'finished')
         task5 = create(:task, title: "task_5", status: 'working')
-        expect(Task.search("taskc", "")).to be_empty
+        params = { title: "taskc", status: "" }
+        expect(Task.search(params)).to be_empty
       end
     end
 
@@ -76,7 +78,8 @@ describe Task, type: :model do
         task3 = create(:task, title: "task_3", status: 'finished')
         task4 = create(:task, title: "taskb_4", status: 'finished')
         task5 = create(:task, title: "task_5", status: 'working')
-        expect(Task.search("sk_", "1")).to include(task2, task5)
+        params = { title: "sk_", status: "1" }
+        expect(Task.search(params)).to include(task2, task5)
       end
     end
 
@@ -89,7 +92,8 @@ describe Task, type: :model do
         task3 = create(:task, title: "task_3", status: 'finished')
         task4 = create(:task, title: "taskb_4", status: 'finished')
         task5 = create(:task, title: "task_5", status: 'working')
-        expect(Task.search("skc_", "2")).to be_empty
+        params = { title: "skc_", status: "2" }
+        expect(Task.search(params)).to be_empty
       end
     end
     # 検索フォームに何も値が入っていないとき
@@ -101,7 +105,8 @@ describe Task, type: :model do
         task3 = create(:task, title: "task_3", status: 'finished')
         task4 = create(:task, title: "taskb_4", status: 'finished')
         task5 = create(:task, title: "task_5", status: 'working')
-        expect(Task.search("", "")).to include(task1, task2, task3, task4, task5)
+        params = { title: "", status: "" }
+        expect(Task.search(params)).to include(task1, task2, task3, task4, task5)
       end
     end
   end

@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if @user.authenticate(session_params[:password])
+    if @user.present? && @user.authenticate(session_params[:password])
       sign_in(@user)
       flash[:success] = t 'sessions.login.success'
       redirect_to root_path
