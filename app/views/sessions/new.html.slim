@@ -1,0 +1,11 @@
+h1 ログイン画面
+= flash[:success]
+= flash[:failed]
+= form_with scope: :session, url: login_path, local: true do |f|
+  .form-group
+    = f.label :email, t('activerecord.attributes.user.email')
+    = f.text_field :email, class: "form-control"
+  .form-group
+    = f.label :password, t('activerecord.attributes.user.password')
+    = f.password_field :password, class: "form-control"
+  = f.submit t('buttons.login'), type: "submit", class: "btn btn-primary mb-2"

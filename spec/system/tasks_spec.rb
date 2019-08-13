@@ -1,13 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe 'Tasks', type: :system do
-  # before do
-  #   @task = Task.create(title: 'タスク３３３', body: 'タスク本文', status: 1)
-  # end
+
+  before do
+    @user = create(:user)
+    login(@user)
+  end
 
   feature 'new page' do
 
-    given(:task) { Task.create(
+    given(:task) { create(:task,
       title: "タスクタイトル",
       body: "タスク本文",
       status: Task.statuses.key(0),
@@ -48,7 +50,8 @@ RSpec.describe 'Tasks', type: :system do
         title: "タスクテスト", 
         body: "タスクテスト本文", 
         status: Task.statuses.key(1), 
-        priority: Task.priorities.key(2)
+        priority: Task.priorities.key(2),
+        user_id: @user.id
       )
     end
 
@@ -87,7 +90,8 @@ RSpec.describe 'Tasks', type: :system do
         body: "タスクテスト本文１", 
         status: Task.statuses["working"], 
         deadline: Date.today + 10.days, 
-        priority: Task.priorities["high"]
+        priority: Task.priorities["high"],
+        user_id: @user.id
       )
       @task = Task.create(
         title: "タスクテスト２", 
@@ -95,14 +99,16 @@ RSpec.describe 'Tasks', type: :system do
         status: Task.statuses["waiting"], 
         deadline: Date.today + 20.days, 
         priority: Task.priorities["middle"], 
-        created_at: Time.current + 1.days
+        created_at: Time.current + 1.days,
+        user_id: @user.id
       )
       @task = Task.create(
         title: "タスクテスト３", 
         body: "タスクテスト本文３", 
         status: Task.statuses["finished"], 
         priority: Task.priorities["low"], 
-        created_at: Time.current + 2.days
+        created_at: Time.current + 2.days,
+        user_id: @user.id
       )
       @task = Task.create(
         title: "タスクテスト４", 
@@ -110,7 +116,8 @@ RSpec.describe 'Tasks', type: :system do
         status: Task.statuses["waiting"], 
         deadline: Date.today + 20.days, 
         priority: Task.priorities["low"], 
-        created_at: Time.current + 3.days
+        created_at: Time.current + 3.days,
+        user_id: @user.id
       )
     end
 
@@ -231,13 +238,13 @@ RSpec.describe 'Tasks', type: :system do
         title: "タスクテスト", 
         body: "タスクテスト本文", 
         status: Task.statuses.key(1), 
-        priority: Task.priorities.key(0)
+        priority: Task.priorities.key(0),
+        user_id: @user.id
       )
     end
 
     scenario 'succeed in task destruction in show page', type: :system do
       visit task_path(id: @task.id)
-
       click_on I18n.t('buttons.delete')
 
       expect(page).to have_content("タスク一覧")
