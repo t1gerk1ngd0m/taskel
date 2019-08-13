@@ -12,7 +12,7 @@ html
       - if signed_in?
         li.nav-item
           .nav-link
-            = link_to I18n.t('buttons.new'), "/tasks/new", method: :get, class: "color-white"
+            = link_to I18n.t('buttons.new'), new_task_path, method: :get, class: "color-white"
         li.nav-item
           .nav-link.color-white
             = @current_user.name
