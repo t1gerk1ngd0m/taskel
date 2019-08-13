@@ -26,7 +26,7 @@
           td.task-index__task--deadline
             = t('activerecord.attributes.task.deadline')
           td.task-index__task--deadline
-            = @task.deadline
+            = I18n.l(@task.deadline, foramt: :default, default: '-')
         tr
           td.task-index__task--status
             = t('activerecord.attributes.task.status')
@@ -41,7 +41,7 @@
           td.task-index__task--created_at
             = t('activerecord.attributes.task.created_at')
           td.task-index__task--created_at
-            = @task.created_at.to_s(:date_time)
+            = I18n.l(@task.created_at, foramt: :default, default: '-')
         tr
           td.task-index__task--user_id
             = t('activerecord.attributes.task.user_id')
