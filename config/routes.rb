@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  ActiveAdmin.routes(self)
   root  'tasks#index'
   resources :tasks do
   end
