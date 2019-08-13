@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_secure_password validations: true
-  has_many :tasks
+  has_many :tasks, dependent: :delete_all
 
   REG_MAIL_ADDRESS = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   REG_PASSWORD = /\A[a-z\d]{6,}+\z/i
