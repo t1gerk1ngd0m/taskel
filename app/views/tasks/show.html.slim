@@ -4,18 +4,51 @@
   = flash[:success]
   = flash[:failed]
   .task-show__task
-    p.task-show__task--title
-      = @task.title
-    p.task-show__task--body
-      = @task.body
-    p.task-show__task--deadline
-      = @task.deadline
-    p.task-show__task--status
-      = @task.status_i18n
-    p.task-show__task--created_at
-      = @task.created_at.to_s(:date_time)
+    table.table.table-striped.table-hover
+      thead.column
+        tr
+          th scope="col"
+            | 項目名
+          th scope="col"
+            | 詳細
+      tbody.column
+        tr
+          td.task-index__task--title
+            = t('activerecord.attributes.task.title')
+          td.task-index__task--title
+            = @task.title
+        tr
+          td.task-index__task--body
+            = t('activerecord.attributes.task.body')
+          td.task-index__task--body
+            = @task.body
+        tr
+          td.task-index__task--deadline
+            = t('activerecord.attributes.task.deadline')
+          td.task-index__task--deadline
+            = I18n.l(@task.deadline, foramt: :default, default: '-')
+        tr
+          td.task-index__task--status
+            = t('activerecord.attributes.task.status')
+          td.task-index__task--status
+            = @task.status_i18n
+        tr
+          td.task-index__task--priority
+            = t('activerecord.attributes.task.priority')
+          td.task-index__task--priority
+            = @task.priority_i18n
+        tr
+          td.task-index__task--created_at
+            = t('activerecord.attributes.task.created_at')
+          td.task-index__task--created_at
+            = I18n.l(@task.created_at, foramt: :default, default: '-')
+        tr
+          td.task-index__task--user_id
+            = t('activerecord.attributes.task.user_id')
+          td.task-index__task--created_at
+            = @task.user.name
     ul.task-show__task--menu
       li.task-show__task--li
-        = link_to I18n.t('buttons.edit'), "/tasks/#{@task.id}/edit", method: :get
+        = link_to I18n.t('buttons.edit'), edit_task_path(@task.id), method: :get
       li.task-show__task--li
-        = link_to I18n.t('buttons.delete'), "/tasks/#{@task.id}", method: :delete
+        = link_to I18n.t('buttons.delete'), task_path(@task.id), method: :delete

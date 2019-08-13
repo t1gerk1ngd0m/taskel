@@ -10,13 +10,37 @@ ja:
       delete_failed: 'タスクの削除に失敗しまし'
     edit:
       edit_failed: 'タスクの編集に失敗しました'
+  sessions:
+    login:
+      success: 'ログインしました'
+      failed: 'ログインできませんでした'
+    logout:
+      success: 'ログアウトしました'
   buttons:
     create: 作成する
     update: 更新する
     show: 詳細
     edit: 編集
     delete: 削除
+    new: タスクを作成する
+    login: ログイン
+    logout: ログアウト
   date:
     default: ! '%Y/%m/%d'
     long: ! '%Y年%m月%d日(%a)'
     short: ! '%m/%d'
+  errors:
+    messages:
+      blank: "を入力してください"
+      uniqueness: "はすでに存在します"
+    users:
+      email: "不正なメールアドレスです"
+      password: "6文字以上の半角英数字で入力してください"
+      confirmation: "とパスワードの入力が一致しません"
+  views:
+    pagination:
+      first: "&laquo;"
+      last: "&raquo;"
+      previous: "&lsaquo;"
+      next: "&rsaquo;"
+      truncate: "..."
