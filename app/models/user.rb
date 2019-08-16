@@ -24,11 +24,38 @@ class User < ApplicationRecord
               allow_blank: true
             },
     allow_nil: true
+
+  before_destroy :last_admin_user_destroy
+  validate :last_admin_user_edit, on: :update
+
+
   def self.new_remember_token
     SecureRandom.urlsafe_base64
   end
 
   def self.encrypt(token)
     Digest::SHA256.hexdigest(token.to_s)
+  end
+
+  private
+  def last_admin_user_destroy
+    if admin_user_last_one? && admin?
+      errors.add(:base, "")
+      throw :abort
+    end
+  end
+
+  def last_admin_user_edit
+    if admin_user_last_one? && role_changed?
+      errors.add(:base, "")
+      throw :abort
+    end
+  end
+
+  def admin_user_last_one?
+    User.all.admin.count == 1
+  end
+
+  def role_change(admin, user)
   end
 end
