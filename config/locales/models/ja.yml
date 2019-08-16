@@ -18,6 +18,7 @@ ja:
         email: メールアドレス
         password: パスワード
         image: ユーザー画像
+        role: 権限
   enums:
     task:
       status:
@@ -28,3 +29,7 @@ ja:
         high: 高
         middle: 中
         low: 低
+    user:
+      role:
+        user: 一般ユーザー
+        admin: 管理者

@@ -3,6 +3,14 @@ class ApplicationController < ActionController::Base
   before_action :require_sign_in!
   helper_method :signed_in?
 
+  rescue_from SecurityError do |exception|
+    redirect_to root_path
+  end
+
+  def authenticate_admin_user!
+    raise SecurityError unless current_user.try(:admin?)
+  end
+
   def current_user
     remember_token = User.encrypt(cookies[:user_remember_token])
     @current_user = User.find_by(remember_token: remember_token) if @current_user.blank?

@@ -2,5 +2,6 @@
   h1.task-index__title
     | タスク一覧
   = flash[:success]
+  = flash[:failed]
   = render 'form', url: tasks_path, method: 'get'
   = render partial: "tasks", locals: { tasks: @tasks }

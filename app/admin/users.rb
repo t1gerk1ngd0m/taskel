@@ -26,6 +26,7 @@ ActiveAdmin.register User do
     column "タスク数", :tasks do |user|
       user.tasks.count
     end
+    column :role
     actions 
   end
 
@@ -35,6 +36,7 @@ ActiveAdmin.register User do
       row :id
       row :name
       row :email
+      row :role
     end
   end
 
@@ -44,6 +46,7 @@ ActiveAdmin.register User do
       input :name
       input :email
       input :password
+      input :role
     end
     actions
   end
