@@ -20,8 +20,10 @@ ja:
     create: 作成する
     update: 更新する
     show: 詳細
-    edit: 編集
-    delete: 削除
+    showback: 詳細へ戻る
+    indexback: 一覧へ戻る
+    edit: 編集する
+    delete: 削除する
     new: タスクを作成する
     login: ログイン
     logout: ログアウト
