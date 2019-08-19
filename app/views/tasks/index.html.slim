@@ -3,4 +3,39 @@
     | タスク一覧
   = flash[:success]
   = render 'form', url: tasks_path, method: 'get'
-  = render partial: "tasks", locals: { tasks: @tasks }
+.task-index__tasks
+  table.table.table-striped.table-hover
+    thead.column
+      tr
+        th scope="col"
+          = t('activerecord.attributes.task.title')
+        th scope="col"
+          = t('activerecord.attributes.task.status')
+        th scope="col"
+          = sortable "priority", t('activerecord.attributes.task.priority')
+        th scope="col"
+          = sortable "deadline", t('activerecord.attributes.task.deadline')
+        th scope="col"
+          = t('activerecord.attributes.task.labelling_id')
+        th scope="col"
+          = sortable "created_at", t('activerecord.attributes.task.created_at')
+        th scope="col"  詳細
+    tbody.column
+      - @tasks.each do |task|
+        tr
+          td.task-index__task--title
+            = task.title
+          td.task-index__task--status
+            = t task.status_i18n
+          td.task-index__task--priority
+            = t task.priority_i18n
+          td.task-index__task--deadline
+            - if(task.deadline)
+              = l(task.deadline, format: :default, default: '-')
+          td.task-index__task--labelling
+            = task.labels.pluck(:name).join(', ')
+          td.task-index__task--created_at
+            = l(task.created_at, format: :default, default: '-')
+          th scope="row"
+            = link_to t('buttons.show'), task_path(task.id), method: :get
+= paginate @tasks
