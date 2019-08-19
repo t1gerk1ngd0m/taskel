@@ -51,6 +51,10 @@
     color: #666;
     box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
   }
+
+  .error-images {
+    margin: 50px;
+  }
   </style>
 </head>
 
@@ -58,10 +62,13 @@
   <!-- This file lives in public/422.html -->
   <div class="dialog">
     <div>
-      <h1>アプリケーションへの変更は拒否されました。</h1>
+      <h1>422Error</h1>
+      <p>アプリケーションへの変更は拒否されました。</p>
       <p>アクセス権限を持っていない変更を行おうとした可能性があります。</p>
     </div>
-    <p>アプリケーション所有者の場合はログ情報を確認してください。</p>
+  </div>
+  <div class="error-images">
+    <img src="images/422error.jpeg" alt="">
   </div>
 </body>
 </html>
