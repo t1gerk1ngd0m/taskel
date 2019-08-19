@@ -1,6 +1,7 @@
 class Task < ApplicationRecord
-  # ログイン/ログアウト機能を通すため一旦optional: trueを追加
-  belongs_to :user, optional: true
+  has_many :labellings, dependent: :destroy
+  has_many :labels, through: :labellings
+  belongs_to :user
   enum status: { waiting: 0, working: 1, finished: 2}
   enum priority: { low: 0, middle: 1, high: 2}
   validates :title, presence: true
