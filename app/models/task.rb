@@ -1,5 +1,5 @@
 class Task < ApplicationRecord
-  has_many :labellings, dependent: :destroy
+  has_many :labellings, dependent: :delete_all
   has_many :labels, through: :labellings
   belongs_to :user
   enum status: { waiting: 0, working: 1, finished: 2}
