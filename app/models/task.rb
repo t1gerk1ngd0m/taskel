@@ -13,6 +13,7 @@ class Task < ApplicationRecord
     search_record = self.all
     search_record = search_record.search_title(params[:title]) if params[:title].present?
     search_record = search_record.search_status(params[:status]) if params[:status].present?
+    search_record = search_record.search_label(params[:label_id]) if params[:label_id].present?
     search_record
   end
 
@@ -23,5 +24,9 @@ class Task < ApplicationRecord
 
   def self.search_status(status)
     where('status = ?', status)
+  end
+
+  def self.search_label(label_id)
+    joins(:labels).where('labels.id = ?', label_id)
   end
 end
