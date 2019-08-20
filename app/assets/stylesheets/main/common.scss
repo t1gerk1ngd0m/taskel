@@ -14,3 +14,30 @@
 .login {
   color: #fff;
 }
+
+.alert-list {
+  position: relative;
+  cursor: pointer;
+}
+
+.alerts {
+  display: block;
+  z-index: 1000;
+  width: 320px;
+  height: 480px;
+  background-color: #fff;
+  padding: 16px 0;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  color: black;
+  position: absolute;
+  top: 30px;
+  right: 0;
+  .alert {
+    border-bottom: dotted 1px #ccc;
+  }
+}
+
+.is_closed {
+  display: none;
+}
