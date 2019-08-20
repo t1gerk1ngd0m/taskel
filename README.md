@@ -7,6 +7,9 @@ https://taskel.herokuapp.com/
 このアプリはmofmof社での研修課題として作成したものです。
 このアプリの作成を通して環境構築、Ruby on Railsの基本的操作、Gitの使い方、テスト、Heroku/AWSへのデプロイなどアプリケーション作成における一連の流れを学習しています。
 
+# ER図
+https://cacoo.com/diagrams/DUr0oE7vGEijWxpf/F0747
+
 # アプリ機能
 タスク管理アプリ
 
