@@ -40,14 +40,14 @@ class User < ApplicationRecord
   private
   def last_admin_user_destroy
     if admin_user_last_one? && admin?
-      errors.add(:base, "")
+      errors.add(:base, I18n.t("errors.base.admin"))
       throw :abort
     end
   end
 
   def last_admin_user_edit
     if admin_user_last_one? && role_changed?
-      errors.add(:base, "")
+      errors.add(:base, I18n.t("errors.base.admin"))
       throw :abort
     end
   end
