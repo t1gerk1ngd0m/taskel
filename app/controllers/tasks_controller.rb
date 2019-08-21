@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task_alerts
   helper_method :sort_column, :sort_direction
-  before_action :task_alerts
 
   def index
     @tasks = current_user.tasks.search(search_params).order("tasks.#{sort_column} #{sort_direction}").page(params[:page])
@@ -76,7 +76,7 @@ class TasksController < ApplicationController
     Task.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
   end
 
-  def task_alerts
-    @alert_tasks = current_user.tasks.notice_tasks
+  def set_task_alerts
+    @set_task_alerts = current_user.tasks.notice_tasks
   end
 end
