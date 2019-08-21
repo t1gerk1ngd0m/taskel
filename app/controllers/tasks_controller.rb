@@ -77,6 +77,6 @@ class TasksController < ApplicationController
   end
 
   def set_task_alerts
-    @set_task_alerts = current_user.tasks.notice_tasks
+    @task_alerts = current_user.tasks.notice_tasks
   end
 end
