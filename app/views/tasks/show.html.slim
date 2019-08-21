@@ -39,7 +39,7 @@
             = @task.priority_i18n
         tr
           td.task-index__task--label
-            = t('activerecord.attributes.task.labelling_id')
+            = t('activerecord.attributes.task.label')
           td.task-index__task--label
             = @task.labels.pluck(:name).join(', ')
         tr
