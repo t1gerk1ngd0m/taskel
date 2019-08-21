@@ -21,9 +21,7 @@ end
 10.times do |n|
   name = Faker::Color.color_name
 
-  Label.create(
-    name: name
-  )
+  Label.create(name: name)
 end
 
 100.times do |i|

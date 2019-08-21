@@ -4,11 +4,11 @@ class ApplicationController < ActionController::Base
   helper_method :signed_in?
 
   rescue_from SecurityError do |exception|
-    redirect_to root_path
+    render file: "#{Rails.root}/public/404.html", status: 404, layout: 'application'
   end
 
   def authenticate_admin_user!
-    raise SecurityError unless current_user.try(:admin?)
+    raise SecurityError unless current_user.admin?
   end
 
   def current_user

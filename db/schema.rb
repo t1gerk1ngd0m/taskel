@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(version: 2019_08_21_050552) do
     t.datetime "updated_at", null: false
     t.integer "priority", default: 0, null: false
     t.bigint "user_id"
-    t.date "read_at"
     t.index ["title"], name: "index_tasks_on_title"
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end

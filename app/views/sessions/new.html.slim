@@ -1,6 +1,4 @@
 h1 ログイン画面
-= flash[:success]
-= flash[:failed]
 = form_with scope: :session, url: login_path, local: true do |f|
   .form-group
     = f.label :email, t('activerecord.attributes.user.email')
