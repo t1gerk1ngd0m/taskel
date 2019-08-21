@@ -39,6 +39,8 @@ ja:
       email: "不正なメールアドレスです"
       password: "6文字以上の半角英数字で入力してください"
       confirmation: "とパスワードの入力が一致しません"
+    base:
+      admin: "管理ユーザーは最低1人必要です"
   views:
     pagination:
       first: "&laquo;"

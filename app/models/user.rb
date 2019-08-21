@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_secure_password validations: true
   has_many :tasks, dependent: :delete_all
 
-  enum role: %i(user admin)
+  enum role: { user: 0, admin: 1 }
 
   REG_MAIL_ADDRESS = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   REG_PASSWORD = /\A[a-z\d]{6,}+\z/i
@@ -40,14 +40,14 @@ class User < ApplicationRecord
   private
   def last_admin_user_destroy
     if admin_user_last_one? && admin?
-      errors.add(:base, "")
+      errors.add(:base, I18n.t("errors.base.admin"))
       throw :abort
     end
   end
 
   def last_admin_user_edit
     if admin_user_last_one? && role_changed?
-      errors.add(:base, "")
+      errors.add(:base, I18n.t("errors.base.admin"))
       throw :abort
     end
   end
