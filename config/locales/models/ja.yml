@@ -4,6 +4,7 @@ ja:
       task: タスク
       user: ユーザー
       label: ラベル
+      group: グループ
     attributes:
       task:
         id: ID
@@ -22,6 +23,9 @@ ja:
         password: パスワード
         image: ユーザー画像
         role: 権限
+      group:
+        name: グループ名
+        user: メンバー
   enums:
     task:
       status:

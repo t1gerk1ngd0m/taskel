@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   
   ActiveAdmin.routes(self)
-  root  'tasks#index'
   resources :tasks do
   end
+  resources :groups
+
+  root  'tasks#index'
 
   get     'login',  to: 'sessions#new'
   post    'login',  to: 'sessions#create'
