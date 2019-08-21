@@ -19,9 +19,9 @@ html
           #notice_tasks.nav-link
             = fa_icon("bell")
             .alerts.is_closed
-              - @set_task_alerts.each do |set_task_alert|
+              - @alert_tasks.each do |alert_task|
                 .alert
-                  = alert_visible(set_task_alert)
+                  = alert_visible(alert_task)
         li.nav-item
           .nav-link.color-white
             = @current_user.name
