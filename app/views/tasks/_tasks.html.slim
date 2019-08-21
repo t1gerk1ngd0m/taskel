@@ -11,7 +11,7 @@
         th scope="col"
           = sortable "deadline", t('activerecord.attributes.task.deadline')
         th scope="col"
-          = t('activerecord.attributes.task.label')
+          = t('activerecord.attributes.task.labelling_id')
         th scope="col"
           = sortable "created_at", t('activerecord.attributes.task.created_at')
         th scope="col"  詳細
@@ -27,7 +27,7 @@
           td.task-index__task--deadline
             - if(task.deadline)
               = l(task.deadline, format: :default, default: '-')
-          td.task-index__task--label
+          td.task-index__task--labelling
             = task.labels.pluck(:name).join(', ')
           td.task-index__task--created_at
             = l(task.created_at, format: :default, default: '-')
