@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_secure_password validations: true
   has_many :tasks, dependent: :delete_all
+  has_many :group_users, dependent: :delete_all
+  has_many :groups, through: :group_users
 
   enum role: { user: 0, admin: 1 }
 
