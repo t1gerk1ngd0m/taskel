@@ -15,7 +15,7 @@ ja:
         created_at: 作成日時
         priority: 優先順位
         user_id: 作成者
-        labelling_id: ラベル
+        label: ラベル
       user:
         name: ユーザー名
         email: メールアドレス
