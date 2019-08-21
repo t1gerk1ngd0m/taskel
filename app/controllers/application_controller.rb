@@ -3,12 +3,8 @@ class ApplicationController < ActionController::Base
   before_action :require_sign_in!
   helper_method :signed_in?
 
-  rescue_from SecurityError do |exception|
-    redirect_to root_path
-  end
-
   def authenticate_admin_user!
-    raise SecurityError unless current_user.try(:admin?)
+    render_404 unless current_user.admin?
   end
 
   def current_user
@@ -35,5 +31,17 @@ class ApplicationController < ActionController::Base
   private
   def require_sign_in!
     redirect_to login_path unless signed_in?
+  end
+
+  def render_404
+    render file: "#{Rails.root}/public/404.html", status: 404, layout: 'application'
+  end
+
+  def render_422
+    render file: "#{Rails.root}/public/422.html", status: 422, layout: 'application'
+  end
+
+  def render_500
+    render file: "#{Rails.root}/public/500.html", status: 500, layout: 'application'
   end
 end
