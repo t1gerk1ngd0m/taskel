@@ -21,5 +21,6 @@ html
       - else
         li.nav-item
           = link_to I18n.t('buttons.login'), login_path, method: :get, class: "color-white login nav-link"
+    = render partial: "layouts/flashes", flash: flash
     .container
       = yield

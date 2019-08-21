@@ -1,7 +1,6 @@
 .task-new
   h1.task-index__show
     | 新規作成画面
-  = flash[:failed]
   .task-new__form
     = form_with model: @task, local: true do |f|
       .form-group
