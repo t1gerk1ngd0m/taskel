@@ -9,7 +9,6 @@ module TaskAlert
 
   private
   def set_task_alerts
-    # binding.pry
     @task_alerts = current_user.tasks.notice_tasks
   end
 end
