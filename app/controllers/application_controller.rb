@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
   before_action :current_user
   before_action :require_sign_in!
   helper_method :signed_in?
-  before_action :task_alerts
 
   rescue_from SecurityError do |exception|
     render file: "#{Rails.root}/public/404.html", status: 404, layout: 'application'
@@ -36,9 +35,5 @@ class ApplicationController < ActionController::Base
   private
   def require_sign_in!
     redirect_to login_path unless signed_in?
-  end
-
-  def task_alerts
-    @alert_tasks = current_user.tasks.notice_tasks
   end
 end

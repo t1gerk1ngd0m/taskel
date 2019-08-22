@@ -20,6 +20,12 @@ ja:
     create:
       success: 'グループを作成しました'
       failed: 'グループの作成に失敗しました'
+    update:
+      success: 'グループを編集しました'
+      failed: 'グループの編集に失敗しました'
+    destroy:
+      success: 'グループを削除しました'
+      failed: 'グループの削除に失敗しました'
   buttons:
     create: 作成する
     update: 更新する
@@ -31,6 +37,7 @@ ja:
     new: タスクを作成する
     login: ログイン
     logout: ログアウト
+    tasks: タスク一覧
   date:
     default: ! '%Y/%m/%d'
     long: ! '%Y年%m月%d日(%a)'

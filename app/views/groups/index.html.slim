@@ -1,0 +1,26 @@
+.group-index
+  h1.group-index__new
+    | グループ一覧画面
+  table.table.table-striped.table-hover
+    thead.column
+      tr
+        th scope="col"
+          = t('activerecord.attributes.group.name')
+        th scope="col"
+          = t('activerecord.attributes.group.user')
+        th scope="col"  タスク一覧
+        th scope="col"  編集
+        th scope="col"  削除
+    tbody.column
+      - @groups.each do |group|
+        tr
+          td.group-index__group--name
+            = group.name
+          td.group-index__group--user
+            = group.users.pluck(:name).join(', ')
+          th scope="row"
+            = link_to t('buttons.tasks'), group_path(group.id), method: :get
+          th scope="row"
+            = link_to t('buttons.edit'), edit_group_path(group.id), method: :get
+          th scope="row"
+            = link_to t('buttons.delete'), group_path(group.id), method: :delete
