@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
+  include TaskAlert
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-  before_action :set_task_alerts
   helper_method :sort_column, :sort_direction
 
   def index
@@ -74,9 +74,5 @@ class TasksController < ApplicationController
 
   def sort_column
     Task.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
-  end
-
-  def set_task_alerts
-    @task_alerts = current_user.tasks.notice_tasks
   end
 end
