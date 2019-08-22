@@ -12,16 +12,20 @@ html
       - if signed_in?
         li.nav-item
           .nav-link
-            = link_to I18n.t('buttons.new'), new_task_path, method: :get, class: "color-white"
+            = link_to "グループ一覧", root_path, method: :get, class: "color-white"
+        - if @group.present? && @group.id.present? && @task_alerts.present?
+          li.nav-item
+            .nav-link
+              = link_to I18n.t('buttons.new'), new_group_task_path(@group.id), method: :get, class: "color-white"
+          li.nav-item.color-white.alert-list
+            #notice_tasks.nav-link
+              = fa_icon("bell")
+              .alerts.is_closed
+                - @task_alerts.each do |task_alert|
+                  .alert
+                    = alert_visible(@group, task_alert)
         li.nav-item
           = link_to I18n.t('buttons.logout'), logout_path, method: :delete, class: "color-white logout nav-link"
-        li.nav-item.color-white.alert-list
-          #notice_tasks.nav-link
-            = fa_icon("bell")
-            .alerts.is_closed
-              - @task_alerts.each do |task_alert|
-                .alert
-                  = alert_visible(task_alert)
         li.nav-item
           .nav-link.color-white
             = @current_user.name

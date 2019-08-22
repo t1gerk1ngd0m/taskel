@@ -1,24 +1,25 @@
 class TasksController < ApplicationController
   include TaskAlert
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_group
   helper_method :sort_column, :sort_direction
 
   def index
-    @tasks = current_user.tasks.search(search_params).order("tasks.#{sort_column} #{sort_direction}").page(params[:page])
+    @tasks = @group.tasks.search(search_params).order("tasks.#{sort_column} #{sort_direction}").page(params[:page])
   end
 
   def new
-    @task = Task.new
+    @task = @group.tasks.new
   end
 
   def show
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = @group.tasks.new(task_params)
     if @task.save
       flash[:success] = t 'tasks.index.saved'
-      redirect_to root_path
+      redirect_to group_tasks_path(@group.id)
     else
       flash[:failed] = t 'tasks.new.save_failed'
       render :new
@@ -41,7 +42,7 @@ class TasksController < ApplicationController
   def destroy
     if @task.destroy
       flash[:success] = t 'tasks.index.deleted'
-      redirect_to root_path
+      redirect_to group_tasks_path(@group.id)
     else
       flash[:failed] = t 'tasks.show.delete_failed'
       render :show
@@ -66,6 +67,10 @@ class TasksController < ApplicationController
 
   def set_task
     @task = Task.find(params[:id])
+  end
+
+  def set_group
+    @group = Group.find(params[:group_id])
   end
 
   def sort_direction

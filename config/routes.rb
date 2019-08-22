@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   
   ActiveAdmin.routes(self)
-  resources :tasks do
+  resources :groups, except: [:show] do
+    resources :tasks
   end
-  resources :groups
 
-  root  'tasks#index'
+  root  'groups#index'
 
   get     'login',  to: 'sessions#new'
   post    'login',  to: 'sessions#create'

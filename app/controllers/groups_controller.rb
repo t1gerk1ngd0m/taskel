@@ -1,5 +1,4 @@
 class GroupsController < ApplicationController
-  include TaskAlert
   before_action :set_group, only: [:edit, :update, :destroy]
 
   def index
