@@ -7,4 +7,11 @@ module ApplicationHelper
     direction = (column == sort_column && sort_direction == "asc") ? "desc" : "asc"
     link_to title, {sort: column, direction: direction}, {class: css_class}
   end
+
+  def flash_class_for(key)
+    case key
+      when 'success' then 'alert-success'
+      when 'failed'   then 'alert-danger'
+    end
+  end
 end

@@ -20,8 +20,10 @@ ja:
     create: 作成する
     update: 更新する
     show: 詳細
-    edit: 編集
-    delete: 削除
+    showback: 詳細へ戻る
+    indexback: 一覧へ戻る
+    edit: 編集する
+    delete: 削除する
     new: タスクを作成する
     login: ログイン
     logout: ログアウト
@@ -37,6 +39,8 @@ ja:
       email: "不正なメールアドレスです"
       password: "6文字以上の半角英数字で入力してください"
       confirmation: "とパスワードの入力が一致しません"
+    base:
+      admin: "管理ユーザーは最低1人必要です"
   views:
     pagination:
       first: "&laquo;"

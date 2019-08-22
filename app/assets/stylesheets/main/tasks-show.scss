@@ -25,18 +25,7 @@
   &__task--status {
     margin-bottom: 30px;
   }
-  &__task--menu {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  &__task--li {
-    width: 49%;
-    text-align: center;
-    border: 1px #343a40 solid;
-    a {
-      display: block;
-    }
+  .b-margin {
+    margin-left: 10px;
   }
 }
