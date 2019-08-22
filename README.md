@@ -1,24 +1,29 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# 本番環境
+https://taskel.herokuapp.com/
 
-Things you may want to cover:
+# アプリ作成の目的
+このアプリはmofmof社での研修課題として作成したものです。
+このアプリの作成を通して環境構築、Ruby on Railsの基本的操作、Gitの使い方、テスト、Heroku/AWSへのデプロイなどアプリケーション作成における一連の流れを学習しています。
 
-* Ruby version
+# ER図
+https://cacoo.com/diagrams/DUr0oE7vGEijWxpf/F0747
 
-* System dependencies
+# アプリ機能
+タスク管理アプリ
 
-* Configuration
+# DB構造
+画像に記載の通り
 
-* Database creation
+# デプロイ方法
+ターミナル上で下記のコマンドを実行  
+` git push heroku master `  
+下記のコマンドを実行し本番環境を確認  
+` heroku open `  
+本番環境でエラー発生時は下記コマンドで確認  
+` heroku logs `  
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# フレームワークバージョン
+ruby 2.6.3p62 (2019-04-16 revision 67580) [x86_64-darwin18]  
+Rails 5.2.3  
