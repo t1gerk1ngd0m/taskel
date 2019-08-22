@@ -1,0 +1,12 @@
+  .task-index__search
+    p タスクを検索する
+    = form_with(model: nil, scope: nil, url: url, method: method, local: true, class: 'input-group') do |f|
+      .form-inline
+        = f.label t('activerecord.attributes.task.title'), class: "sr-only"
+        = f.text_field :title, class: "form-control mb-2 mr-sm-2", placeholder: "タイトル"
+      .form-inline
+        = f.label t('activerecord.attributes.task.status'), class: "sr-only"
+        = f.select :status, Task.statuses_i18n.keys.map { |k| [Task.statuses_i18n[k], Task.statuses[k]]}, { include_blank: "---" }, class: "form-control mb-2 mr-sm-2", id: "search-status"
+      span.btn.mb-2
+        = f.button "検索", type: "submit", class: "btn btn-primary", id: "search"
+          i.fa.fa-search

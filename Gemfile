@@ -23,7 +23,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
@@ -42,6 +42,7 @@ group :development, :test do
   gem 'pry-doc'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
+  gem 'database_cleaner'
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem 'webdrivers'
@@ -71,3 +72,13 @@ gem 'rails-i18n', '~> 5.1'
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 gem 'enum_help'
+gem 'slim-rails'
+gem 'html2slim'
+gem "bootstrap4-datetime-picker-rails"
+gem 'momentjs-rails'
+gem "font-awesome-rails"
+gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+gem 'kaminari', '>= 1.0.1'
+gem 'kaminari-bootstrap'
+gem 'bootstrap-sass'
+gem 'activeadmin'

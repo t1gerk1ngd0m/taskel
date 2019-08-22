@@ -1,0 +1,30 @@
+.task-new
+  h1.task-index__show
+    | 新規作成画面
+  .task-new__form
+    = form_with model: @task, local: true do |f|
+      .form-group
+        = f.label :title, t('activerecord.attributes.task.title')
+        = f.text_field :title, placeholder: "タスクタイトル", class: "form-control"
+        = render 'shared/validation_message', model: f.object, attributes: :title
+      .form-group
+        = f.label :body, t('activerecord.attributes.task.body')
+        = f.text_area :body, placeholder: "タスク内容", class: "form-control"
+        = render 'shared/validation_message', model: f.object, attributes: :body
+      .form-group
+        = f.label :status, t('activerecord.attributes.task.status')
+        = f.select :status, Task.statuses_i18n.keys.map { |k| [Task.statuses_i18n[k], k]}, { include_blank: "---" }, class: "form-control"
+        = render 'shared/validation_message', model: f.object, attributes: :status
+      .form-group
+        = f.label :deadline, t('activerecord.attributes.task.deadline')
+        #datechoise.input-group.date data-target-input="nearest"
+          = f.text_field :deadline, class: "form-control datetimepicker-input", data: {target: "#datechoise"}
+          .input-group-append  data-target="#datechoise" data-toggle="datetimepicker"
+            .input-group-text
+               i.fa.fa-calendar
+      .form-group
+        = f.label :priority, t('activerecord.attributes.task.priority')
+        = f.select :priority, Task.priorities_i18n.keys.map { |k| [Task.priorities_i18n[k], k]}, {}, class: "form-control"
+        = render 'shared/validation_message', model: f.object, attributes: :priority
+      = f.button t('buttons.create'), type: "submit", class: "btn btn-primary mb-2"
+      = link_to t('buttons.indexback'), root_path, method: :get, class: "btn btn-primary mb-2 b-margin"

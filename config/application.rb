@@ -12,6 +12,7 @@ module Taskel
     config.load_defaults 5.2
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :utc 
+    config.generators.template_engine = :slim #slimに変更
 
     config.generators do |g|
       g.test_framework false
@@ -19,6 +20,8 @@ module Taskel
       config.i18n.default_locale = :ja # デフォルトのlocaleを日本語(:ja)にする
       config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
     end
+
+    config.assets.precompile += %w[admin/active_admin.css admin/active_admin.js]
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

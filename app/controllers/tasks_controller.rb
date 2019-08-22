@@ -1,8 +1,9 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction
 
   def index
-    @tasks = Task.all.order(created_at: :desc)
+    @tasks = current_user.tasks.search(search_params).order("tasks.#{sort_column} #{sort_direction}").page(params[:page])
   end
 
   def new
@@ -39,7 +40,7 @@ class TasksController < ApplicationController
   def destroy
     if @task.destroy
       flash[:success] = t 'tasks.index.deleted'
-      redirect_to root_path      
+      redirect_to root_path
     else
       flash[:failed] = t 'tasks.show.delete_failed'
       render :show
@@ -48,10 +49,28 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:title, :body, :status)
+    params.require(:task).permit(
+      :title, 
+      :body, 
+      :status, 
+      :deadline, 
+      :priority
+    ).merge(user_id: current_user.id)
+  end
+
+  def search_params
+    params.permit(:title, :status)
   end
 
   def set_task
     @task = Task.find(params[:id])
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"
+  end
+
+  def sort_column
+    Task.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
   end
 end
