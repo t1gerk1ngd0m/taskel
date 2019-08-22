@@ -25,7 +25,7 @@ ja:
         role: 権限
       group:
         name: グループ名
-        user: メンバー
+        users: メンバー
   enums:
     task:
       status:
