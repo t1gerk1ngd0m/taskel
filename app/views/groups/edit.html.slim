@@ -1,6 +1,7 @@
 .group-new
   h1.group-new__new
     | グループ編集画面
+  = render partial: "new_group"
   .group-new__form
     = form_with model: @group, local: true do |f|
       .form-group
