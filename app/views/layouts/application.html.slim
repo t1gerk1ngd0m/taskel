@@ -14,12 +14,13 @@ html
           .nav-link
             = link_to I18n.t('buttons.new'), new_task_path, method: :get, class: "color-white"
         li.nav-item
+          = link_to I18n.t('buttons.logout'), logout_path, method: :delete, class: "color-white logout nav-link"
+        li.nav-item
           .nav-link.color-white
             = @current_user.name
-        li.nav-item
-          = link_to I18n.t('buttons.logout'), logout_path, method: :delete, class: "color-white logout nav-link"
       - else
         li.nav-item
           = link_to I18n.t('buttons.login'), login_path, method: :get, class: "color-white login nav-link"
+    = render partial: "layouts/flashes", flash: flash
     .container
       = yield

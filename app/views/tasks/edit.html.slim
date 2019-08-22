@@ -1,7 +1,6 @@
 .task-new
   h1
     | 編集画面
-  = flash[:failed]
   .task-new__form
     = form_with model: @task, local: true do |f|
       .form-group
@@ -28,3 +27,4 @@
         = f.select :priority, Task.priorities_i18n.keys.map { |k| [Task.priorities_i18n[k], k]}, {}, class: "form-control"
         = render 'shared/validation_message', model: f.object, attributes: :priority
       = f.button t('buttons.update'), type: "submit", class: "btn btn-primary mb-2"
+      = link_to t('buttons.showback'), task_path(@task.id), method: :get, class: "btn btn-primary mb-2 b-margin"
