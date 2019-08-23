@@ -15,6 +15,13 @@ html
             = link_to I18n.t('buttons.new'), new_task_path, method: :get, class: "color-white"
         li.nav-item
           = link_to I18n.t('buttons.logout'), logout_path, method: :delete, class: "color-white logout nav-link"
+        li.nav-item.color-white.alert-list
+          #notice_tasks.nav-link
+            = fa_icon("bell")
+            .alerts.is_closed
+              - @task_alerts.each do |task_alert|
+                .alert
+                  = alert_visible(task_alert)
         li.nav-item
           .nav-link.color-white
             = @current_user.name

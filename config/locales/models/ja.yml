@@ -2,6 +2,8 @@ ja:
   activerecord:
     models:
       task: タスク
+      user: ユーザー
+      label: ラベル
     attributes:
       task:
         id: ID
@@ -13,6 +15,7 @@ ja:
         created_at: 作成日時
         priority: 優先順位
         user_id: 作成者
+        label: ラベル
       user:
         name: ユーザー名
         email: メールアドレス
