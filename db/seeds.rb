@@ -18,6 +18,12 @@
   )
 end
 
+10.times do |n|
+  name = Faker::Color.color_name
+
+  Label.create(name: name)
+end
+
 100.times do |i|
   title = Faker::Beer.brand
   body = "名前：#{Faker::Beer.name}\nスタイル：#{Faker::Beer.style}\nホップ：#{Faker::Beer.hop}"

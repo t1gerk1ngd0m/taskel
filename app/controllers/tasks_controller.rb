@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  include TaskAlert
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
 
@@ -54,12 +55,13 @@ class TasksController < ApplicationController
       :body, 
       :status, 
       :deadline, 
-      :priority
+      :priority,
+      { label_ids: [] }
     ).merge(user_id: current_user.id)
   end
 
   def search_params
-    params.permit(:title, :status)
+    params.permit(:title, :status, :label_id)
   end
 
   def set_task

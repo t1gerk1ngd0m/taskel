@@ -6,7 +6,10 @@
         = f.text_field :title, class: "form-control mb-2 mr-sm-2", placeholder: "タイトル"
       .form-inline
         = f.label t('activerecord.attributes.task.status'), class: "sr-only"
-        = f.select :status, Task.statuses_i18n.keys.map { |k| [Task.statuses_i18n[k], Task.statuses[k]]}, { include_blank: "---" }, class: "form-control mb-2 mr-sm-2", id: "search-status"
+        = f.select :status, Task.statuses_i18n.keys.map { |k| [Task.statuses_i18n[k], Task.statuses[k]]}, { include_blank: "ステータス選択" }, class: "form-control mb-2 mr-sm-2", id: "search-status"
+      .form-inline
+        = f.label t('activerecord.attributes.task.label'), class: "sr-only"
+        = f.select "label_id", Label.pluck(:name, :id), { include_blank: "ラベル選択" }, class: "form-control mb-2 mr-sm-2"
       span.btn.mb-2
         = f.button "検索", type: "submit", class: "btn btn-primary", id: "search"
           i.fa.fa-search
