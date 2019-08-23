@@ -36,7 +36,7 @@ class Task < ApplicationRecord
   end
 
   def self.not_completed_tasks
-    self.where('status != ?', 2)
+    self.where('status != ?', Task.statuses[:finished])
   end
 
   def self.near_deadline_tasks
