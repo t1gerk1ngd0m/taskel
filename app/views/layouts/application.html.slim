@@ -13,7 +13,7 @@ html
         li.nav-item
           .nav-link
             = link_to "グループ一覧", root_path, method: :get, class: "color-white"
-        - if @group.present? && @group.id.present? && @task_alerts.present?
+        - if @group.present? && @group.id.present? && !(@task_alerts.nil?)
           li.nav-item
             .nav-link
               = link_to I18n.t('buttons.new'), new_group_task_path(@group.id), method: :get, class: "color-white"
