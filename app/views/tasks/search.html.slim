@@ -1,6 +1,0 @@
-.task-index
-  h1.task-index__title
-    | タスク一覧
-  = flash[:success]
-  = render 'form', url: search_tasks_path, method: 'get'
-  = render partial: "tasks", locals: { tasks: @tasks }

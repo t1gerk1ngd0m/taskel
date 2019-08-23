@@ -15,7 +15,6 @@ ActiveAdmin.register Task do
 
   controller do
     def scoped_collection
-      super
       Task.includes(:user)
     end
   end
