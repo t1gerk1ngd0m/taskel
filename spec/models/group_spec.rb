@@ -9,15 +9,15 @@ describe Group, type: :model do
       group.valid?
       expect(group.errors[:name]).to include I18n.t('errors.messages.blank')
     end
-    # it "is invalid without a users" do
-    #   group = build(:group, users: nil)
-    #   group.valid?
-    #   expect(group.errors[:users]).to include I18n.t('errors.messages.blank')
-    # end
-    # it "is valid with a name and users" do
-    #   group = build(:group)
-    #   group.valid?
-    #   expect(group).to be_valid
-    # end
+    it "is invalid without a users" do
+      group = build(:group, users: [])
+      group.valid?
+      expect(group.errors[:users]).to include I18n.t('errors.messages.blank')
+    end
+    it "is valid with a name and users" do
+      group = build(:group, :group_with_users)
+      group.valid?
+      expect(group).to be_valid
+    end
   end
 end
