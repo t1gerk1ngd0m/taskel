@@ -17,6 +17,10 @@ class Task < ApplicationRecord
     search_record
   end
 
+  def self.notice_tasks
+    self.not_completed_tasks.near_deadline_tasks
+  end
+
   private
   def self.search_title(title)
     where('title Like(?)', "%#{title}%")
@@ -28,5 +32,13 @@ class Task < ApplicationRecord
 
   def self.search_label(label_id)
     joins(:labels).where('labels.id = ?', label_id)
+  end
+
+  def self.not_completed_tasks
+    self.where('status != ?', Task.statuses[:finished])
+  end
+
+  def self.near_deadline_tasks
+    self.where('deadline <= ?', Time.zone.today+1)
   end
 end
