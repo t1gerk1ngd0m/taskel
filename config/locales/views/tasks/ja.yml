@@ -7,9 +7,11 @@ ja:
       save_failed: 'タスクの作成に失敗しました'
     show:
       edited: 'タスクを編集しました'
-      delete_failed: 'タスクの削除に失敗しまし'
+      delete_failed: 'タスクの削除に失敗しました'
     edit:
       edit_failed: 'タスクの編集に失敗しました'
+    role:
+      failed: 'このタスクに関する権限がありません'
   sessions:
     login:
       success: 'ログインしました'
@@ -26,6 +28,8 @@ ja:
     destroy:
       success: 'グループを削除しました'
       failed: 'グループの削除に失敗しました'
+    role:
+      failed: 'グループの編集権限がありません'
   buttons:
     create: 作成する
     update: 更新する

@@ -2,6 +2,8 @@ class TasksController < ApplicationController
   include TaskAlert
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :set_group
+  before_action :require_maker, only: [:destroy]
+  before_action :require_member, only: [:edit, :update, :show]
   helper_method :sort_column, :sort_direction
 
   def index
@@ -40,7 +42,7 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    if @task.destroy
+    if  @task.destroy
       flash[:success] = t 'tasks.index.deleted'
       redirect_to group_tasks_path(@group.id)
     else
@@ -79,5 +81,23 @@ class TasksController < ApplicationController
 
   def sort_column
     Task.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+  end
+
+  def require_maker
+    set_group
+    set_task
+    unless current_user == @task.user
+      flash[:failed] = t 'tasks.role.failed'
+      render :show
+    end
+  end
+
+  def require_member
+    set_group
+    set_task
+    unless (@group.users.any? {|n| n == current_user})
+      flash[:failed] = t 'tasks.role.failed'
+      redirect_to root_path
+    end
   end
 end
