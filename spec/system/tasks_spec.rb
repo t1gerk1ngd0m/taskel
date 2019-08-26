@@ -5,7 +5,7 @@ RSpec.describe 'Tasks', type: :system do
   before do
     @user = create(:user)
     login(@user)
-    @group = create(:group, :group_with_users)
+    @group = create(:group, users: [@user], owner_user: @user)
   end
 
   feature 'new page' do

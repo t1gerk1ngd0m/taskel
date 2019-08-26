@@ -47,7 +47,8 @@ RSpec.describe 'Groups', type: :system do
     before do
       @group = create(:group,
         name: "テストグループ", 
-        users: [@user[0], @user[1], @user[2]]
+        users: [@user[1], @user[2]],
+        owner_user: @user[0]
       )
     end
 
@@ -85,7 +86,8 @@ RSpec.describe 'Groups', type: :system do
     before do
       @group = create(:group,
         name: "テストグループ", 
-        users: [@user[0], @user[1], @user[2]]
+        users: [@user[1], @user[2]],
+        owner_user: @user[0]
       )
     end
 
