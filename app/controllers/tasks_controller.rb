@@ -72,7 +72,8 @@ class TasksController < ApplicationController
       :priority,
       { label_ids: [] }
     )
-    p.except(:status) unless @task.user == current_user 
+    p.except(:status) unless @task.user == current_user
+    p
   end
 
   def search_params
