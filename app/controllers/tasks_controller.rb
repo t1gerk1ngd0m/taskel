@@ -64,24 +64,15 @@ class TasksController < ApplicationController
   end
 
   def update_task_params
-    if @task.user == current_user
-      params.require(:task).permit(
-        :title, 
-        :body, 
-        :status, 
-        :deadline, 
-        :priority,
-        { label_ids: [] }
-      )
-    else
-      params.require(:task).permit(
-        :title, 
-        :body, 
-        :deadline, 
-        :priority,
-        { label_ids: [] }
-      )
-    end
+    p = params.require(:task).permit(
+      :title, 
+      :body, 
+      :status, 
+      :deadline, 
+      :priority,
+      { label_ids: [] }
+    )
+    p.except(:status) unless @task.user == current_user 
   end
 
   def search_params
