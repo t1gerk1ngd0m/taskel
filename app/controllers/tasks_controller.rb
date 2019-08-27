@@ -59,6 +59,7 @@ class TasksController < ApplicationController
       :status, 
       :deadline, 
       :priority,
+      :file,
       { label_ids: [] }
     ).merge(user_id: current_user.id)
   end
@@ -71,6 +72,7 @@ class TasksController < ApplicationController
         :status, 
         :deadline, 
         :priority,
+        :file,
         { label_ids: [] }
       )
     else
@@ -79,6 +81,7 @@ class TasksController < ApplicationController
         :body, 
         :deadline, 
         :priority,
+        :file,
         { label_ids: [] }
       )
     end
