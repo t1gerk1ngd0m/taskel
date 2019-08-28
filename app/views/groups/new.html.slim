@@ -9,7 +9,7 @@
         = render 'shared/validation_message', model: f.object, attributes: :name
       .form-group
         = f.label :name, t('activerecord.attributes.group.user')
-        = f.collection_check_boxes(:user_ids, @users, :id, :name, include_hidden: false) do |b|
+        = f.collection_check_boxes(:user_ids, @selecting_users, :id, :name, include_hidden: false) do |b|
           .form-check
             = b.check_box class: "form-check-input"
             = b.label class: "form-check-label"

@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:edit, :update, :destroy]
   before_action :require_owner, only: [:edit, :update, :destroy]
-  before_action :set_users, only: [:new, :create, :edit, :update]
+  before_action :set_selecting_users, only: [:new, :create, :edit, :update]
 
   def index
     @groups = current_user.groups.all
@@ -65,7 +65,7 @@ class GroupsController < ApplicationController
     end
   end
     
-  def set_users
-    @users = User.all
+  def set_selecting_users
+    @selecting_users = User.all
   end
 end
