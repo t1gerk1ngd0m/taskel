@@ -1,7 +1,7 @@
 .task-index
   h1.task-index__title
     | タスク一覧
-  = render 'form', url: group_tasks_path(@group.id), method: 'get'
+  = render 'form', url: group_tasks_path(@group), method: 'get'
   .task-index__tasks
     table.table.table-striped.table-hover
       thead.column
@@ -32,9 +32,9 @@
               - if(task.deadline)
                 = l(task.deadline, format: :default, default: '-')
             td.task-index__task--label
-              = task.labels.pluck(:name).join(', ')
+              = side_by_side_labels(task)
             td.task-index__task--created_at
               = l(task.created_at, format: :default, default: '-')
             th scope="row"
-              = link_to t('buttons.show'), group_task_path(@group.id, task.id), method: :get
+              = link_to t('buttons.show'), group_task_path(@group, task), method: :get
   = paginate @tasks
