@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   include TaskAlert
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :set_group
-  before_action :require_maker, only: [:destroy]
+  before_action :require_owner, only: [:destroy]
   before_action :require_member, only: [:edit, :update, :show]
   helper_method :sort_column, :sort_direction
 
@@ -96,7 +96,7 @@ class TasksController < ApplicationController
     Task.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
   end
 
-  def require_maker
+  def require_owner
     unless current_user == @task.user
       flash[:failed] = t 'tasks.role.failed'
       render :show
