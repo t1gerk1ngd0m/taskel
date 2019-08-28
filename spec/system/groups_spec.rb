@@ -8,13 +8,7 @@ RSpec.describe 'Groups', type: :system do
       @users << create(:user)
     end
 
-    @owner = @users[0]
-    @member1 = @users[1]
-    @member2 = @users[2]
-    @alt_member1 = @users[3]
-    @alt_member2 = @users[4]
-
-    login(@owner)
+    login(@users[0])
   end
 
   feature 'new page' do
@@ -27,8 +21,8 @@ RSpec.describe 'Groups', type: :system do
       visit new_group_path
 
       fill_in I18n.t('activerecord.attributes.group.name'), with: group.name
-      check @member1.name
-      check @member2.name
+      check @users[1].name
+      check @users[2].name
 
       click_button I18n.t('buttons.create')
 
@@ -54,8 +48,8 @@ RSpec.describe 'Groups', type: :system do
     before do
       @group = create(:group,
         name: "テストグループ", 
-        users: [@member1, @member2],
-        owner_user: @owner
+        users: [@users[1], @users[2]],
+        owner_user: @users[0]
       )
     end
 
@@ -63,17 +57,17 @@ RSpec.describe 'Groups', type: :system do
       visit edit_group_path(id: @group.id)
 
       fill_in I18n.t('activerecord.attributes.group.name'), with: "テストグループ２"
-      check @alt_member1.name
-      check @alt_member2.name
-      uncheck @member1.name
-      uncheck @member2.name
+      check @users[3].name
+      check @users[4].name
+      uncheck @users[1].name
+      uncheck @users[2].name
 
       click_button I18n.t('buttons.update')
 
       expect(page).to have_content("グループ一覧画面")
       expect(page).to have_content(I18n.t('groups.update.success'))
       expect(page).to (
-        have_content("テストグループ２") && have_content([@alt_member1.name, @alt_member2.name, @owner.name].join(', '))
+        have_content("テストグループ２") && have_content([@users[3].name, @users[4].name, @users[0].name].join(', '))
       )
     end
 
@@ -93,8 +87,8 @@ RSpec.describe 'Groups', type: :system do
     before do
       @group = create(:group,
         name: "テストグループ", 
-        users: [@member1, @member2],
-        owner_user: @owner
+        users: [@users[1], @users[2]],
+        owner_user: @users[0]
       )
     end
 
