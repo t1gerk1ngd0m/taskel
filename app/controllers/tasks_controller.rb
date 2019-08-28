@@ -11,17 +11,17 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = @group.tasks.new
+    @task = @group.tasks.build
   end
 
   def show
   end
 
   def create
-    @task = @group.tasks.new(task_params)
+    @task = @group.tasks.build(task_params)
     if @task.save
       flash[:success] = t 'tasks.index.saved'
-      redirect_to group_tasks_path(@group.id)
+      redirect_to group_tasks_path(@group)
     else
       flash[:failed] = t 'tasks.new.save_failed'
       render :new
@@ -42,9 +42,9 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    if  @task.destroy
+    if @task.destroy
       flash[:success] = t 'tasks.index.deleted'
-      redirect_to group_tasks_path(@group.id)
+      redirect_to group_tasks_path(@group)
     else
       flash[:failed] = t 'tasks.show.delete_failed'
       render :show
@@ -65,7 +65,7 @@ class TasksController < ApplicationController
   end
 
   def update_task_params
-    p = params.require(:task).permit(
+    t_params = params.require(:task).permit(
       :title, 
       :body, 
       :status, 
@@ -74,8 +74,8 @@ class TasksController < ApplicationController
       :file,
       { label_ids: [] }
     )
-    p.except(:status) unless @task.user == current_user
-    p
+    t_params.except(:status) unless @task.user == current_user
+    t_params
   end
 
   def search_params
@@ -99,8 +99,6 @@ class TasksController < ApplicationController
   end
 
   def require_maker
-    set_group
-    set_task
     unless current_user == @task.user
       flash[:failed] = t 'tasks.role.failed'
       render :show
@@ -108,8 +106,6 @@ class TasksController < ApplicationController
   end
 
   def require_member
-    set_group
-    set_task
     unless (@group.users.any? {|n| n == current_user})
       flash[:failed] = t 'tasks.role.failed'
       redirect_to root_path
