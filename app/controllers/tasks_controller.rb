@@ -11,17 +11,17 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = @group.tasks.new
+    @task = @group.tasks.build
   end
 
   def show
   end
 
   def create
-    @task = @group.tasks.new(task_params)
+    @task = @group.tasks.build(task_params)
     if @task.save
       flash[:success] = t 'tasks.index.saved'
-      redirect_to group_tasks_path(@group.id)
+      redirect_to group_tasks_path(@group)
     else
       flash[:failed] = t 'tasks.new.save_failed'
       render :new
@@ -44,7 +44,7 @@ class TasksController < ApplicationController
   def destroy
     if @task.destroy
       flash[:success] = t 'tasks.index.deleted'
-      redirect_to group_tasks_path(@group.id)
+      redirect_to group_tasks_path(@group)
     else
       flash[:failed] = t 'tasks.show.delete_failed'
       render :show

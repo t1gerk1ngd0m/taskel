@@ -25,8 +25,8 @@
             - if group.owner_user.present?
               = group.owner_user.name
           th scope="row"
-            = link_to t('buttons.tasks'), group_tasks_path(group.id), method: :get
+            = link_to t('buttons.tasks'), group_tasks_path(group)
           th scope="row"
-            = link_to t('buttons.edit'), edit_group_path(group.id), method: :get
+            = link_to t('buttons.edit'), edit_group_path(group)
           th scope="row"
-            = link_to t('buttons.delete'), group_path(group.id), method: :delete
+            = link_to t('buttons.delete'), group_path(group), method: :delete
