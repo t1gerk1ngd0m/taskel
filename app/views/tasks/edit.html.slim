@@ -32,4 +32,4 @@
             = b.check_box class: "form-check-input"
             = b.label class: "form-check-label"
       = f.button t('buttons.update'), type: "submit", class: "btn btn-primary mb-2"
-      = link_to t('buttons.showback'), group_task_path(@group.id, @task.id), method: :get, class: "btn btn-primary mb-2 b-margin"
+      = link_to t('buttons.showback'), group_task_path(@group, @task), method: :get, class: "btn btn-primary mb-2 b-margin"

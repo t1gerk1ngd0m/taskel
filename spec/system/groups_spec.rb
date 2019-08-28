@@ -3,11 +3,12 @@ require 'rails_helper'
 RSpec.describe 'Groups', type: :system do
 
   before do
-    @user = []
-    10.times do |n|
-      @user << create(:user)
+    @users = []
+    5.times do |n|
+      @users << create(:user)
     end
-    login(@user[0])
+
+    login(@users[0])
   end
 
   feature 'new page' do
@@ -20,8 +21,8 @@ RSpec.describe 'Groups', type: :system do
       visit new_group_path
 
       fill_in I18n.t('activerecord.attributes.group.name'), with: group.name
-      check @user[1].name
-      check @user[2].name
+      check @users[1].name
+      check @users[2].name
 
       click_button I18n.t('buttons.create')
 
@@ -47,7 +48,7 @@ RSpec.describe 'Groups', type: :system do
     before do
       @group = create(:group,
         name: "テストグループ", 
-        users: [@user[0], @user[1], @user[2]]
+        users: [@users[0], @users[1], @users[2]]
       )
     end
 
@@ -55,17 +56,17 @@ RSpec.describe 'Groups', type: :system do
       visit edit_group_path(id: @group.id)
 
       fill_in I18n.t('activerecord.attributes.group.name'), with: "テストグループ２"
-      check @user[3].name
-      check @user[4].name
-      uncheck @user[1].name
-      uncheck @user[2].name
+      check @users[3].name
+      check @users[4].name
+      uncheck @users[1].name
+      uncheck @users[2].name
 
       click_button I18n.t('buttons.update')
 
       expect(page).to have_content("グループ一覧画面")
       expect(page).to have_content(I18n.t('groups.update.success'))
       expect(page).to (
-        have_content("テストグループ２") && have_content([@user[3].name, @user[4].name, @user[0].name].join(', '))
+        have_content("テストグループ２") && have_content([@users[3].name, @users[4].name, @users[0].name].join(', '))
       )
     end
 
@@ -85,7 +86,7 @@ RSpec.describe 'Groups', type: :system do
     before do
       @group = create(:group,
         name: "テストグループ", 
-        users: [@user[0], @user[1], @user[2]]
+        users: [@users[0], @users[1], @users[2]]
       )
     end
 

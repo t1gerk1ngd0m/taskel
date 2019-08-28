@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:edit, :update, :destroy]
+  before_action :set_selecting_users, only: [:new, :create, :edit, :update]
 
   def index
     @groups = current_user.groups.all
@@ -8,7 +9,6 @@ class GroupsController < ApplicationController
   def new
     @group = current_user.groups.build
     @group.users << current_user
-    @group_users = User.all
   end
 
   def create
@@ -18,13 +18,11 @@ class GroupsController < ApplicationController
       redirect_to groups_path
     else
       flash[:failed] = t 'groups.create.failed'
-      @group_users = User.all
       render action: :new
     end
   end
 
   def edit
-    @group_users = User.all
   end
 
   def update
@@ -33,7 +31,6 @@ class GroupsController < ApplicationController
       redirect_to groups_path
     else
       flash[:failed] = t 'groups.update.failed'
-      @group_users = User.all
       render action: :edit
     end
   end
@@ -52,11 +49,15 @@ class GroupsController < ApplicationController
   def group_params
     params.require(:group).permit(
       :name, 
-      { user_ids: [] }
+      user_ids: []
     )
   end
 
   def set_group
     @group = Group.find(params[:id])
+  end
+
+  def set_selecting_users
+    @selecting_users = User.all
   end
 end

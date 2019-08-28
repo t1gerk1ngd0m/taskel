@@ -20,8 +20,8 @@
           td.group-index__group--user
             = group.users.pluck(:name).join(', ')
           th scope="row"
-            = link_to t('buttons.tasks'), group_tasks_path(group.id), method: :get
+            = link_to t('buttons.tasks'), group_tasks_path(group)
           th scope="row"
-            = link_to t('buttons.edit'), edit_group_path(group.id), method: :get
+            = link_to t('buttons.edit'), edit_group_path(group)
           th scope="row"
-            = link_to t('buttons.delete'), group_path(group.id), method: :delete
+            = link_to t('buttons.delete'), group_path(group), method: :delete

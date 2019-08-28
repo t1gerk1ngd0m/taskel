@@ -16,7 +16,7 @@ html
         - if @group.present? && @group.id.present? && !(@task_alerts.nil?)
           li.nav-item
             .nav-link
-              = link_to I18n.t('buttons.new'), new_group_task_path(@group.id), method: :get, class: "color-white"
+              = link_to I18n.t('buttons.new'), new_group_task_path(@group), method: :get, class: "color-white"
           li.nav-item.color-white.alert-list
             #notice_tasks.nav-link
               = fa_icon("bell")
