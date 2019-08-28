@@ -14,4 +14,8 @@ module ApplicationHelper
       when 'failed'   then 'alert-danger'
     end
   end
+
+  def side_by_side_labels(value)
+    value.labels.pluck(:name).join(', ')
+  end
 end
