@@ -42,7 +42,7 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    if  @task.destroy
+    if @task.destroy
       flash[:success] = t 'tasks.index.deleted'
       redirect_to group_tasks_path(@group.id)
     else
@@ -64,7 +64,7 @@ class TasksController < ApplicationController
   end
 
   def update_task_params
-    p = params.require(:task).permit(
+    t_params = params.require(:task).permit(
       :title, 
       :body, 
       :status, 
@@ -72,8 +72,8 @@ class TasksController < ApplicationController
       :priority,
       { label_ids: [] }
     )
-    p.except(:status) unless @task.user == current_user
-    p
+    t_params.except(:status) unless @task.user == current_user
+    t_params
   end
 
   def search_params
@@ -97,8 +97,6 @@ class TasksController < ApplicationController
   end
 
   def require_maker
-    set_group
-    set_task
     unless current_user == @task.user
       flash[:failed] = t 'tasks.role.failed'
       render :show
@@ -106,8 +104,6 @@ class TasksController < ApplicationController
   end
 
   def require_member
-    set_group
-    set_task
     unless (@group.users.any? {|n| n == current_user})
       flash[:failed] = t 'tasks.role.failed'
       redirect_to root_path

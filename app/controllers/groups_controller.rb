@@ -61,7 +61,6 @@ class GroupsController < ApplicationController
   end
 
   def require_owner
-    set_group
     unless current_user == @group.owner_user
       flash[:failed] = t 'groups.role.failed'
       redirect_to root_path
