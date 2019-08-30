@@ -3,6 +3,10 @@
 # 本番環境
 https://taskel.herokuapp.com/
 
+## テスト用ログインユーザー情報
+ID: ttttt@yahoo.com
+password: 123456
+
 # アプリ作成の目的
 このアプリはmofmof社での研修課題として作成したものです。
 このアプリの作成を通して環境構築、Ruby on Railsの基本的操作、Gitの使い方、テスト、Heroku/AWSへのデプロイなどアプリケーション作成における一連の流れを学習しています。
