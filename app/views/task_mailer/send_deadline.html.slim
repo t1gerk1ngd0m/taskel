@@ -1,0 +1,21 @@
+doctype html
+html lang="ja" 
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    meta content=("text/html; charset=UTF-8") /
+    css:
+      | h2 {
+        | color: #e7454a;
+      | }
+      | p hr {
+        | color: #2d2a24;
+      | }
+  body
+    h2
+      = @user.name
+      | 様
+    p
+      | 期限間近のタスクです。
+      - @tasks.each do |task|
+        p
+          = task_reminder(task)
