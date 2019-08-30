@@ -23,6 +23,14 @@ class Task < ApplicationRecord
     self.not_completed_tasks.near_deadline_tasks
   end
 
+  def self.remind_tasks
+    users = User.all
+    users.each do |user|
+      remind_tasks = user.tasks.notice_tasks
+      TaskMailer.send_deadline(user, remind_tasks).deliver
+    end
+  end
+
   private
   def self.search_title(title)
     where('title Like(?)', "%#{title}%")

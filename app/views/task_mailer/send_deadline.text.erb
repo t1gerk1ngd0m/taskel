@@ -1,0 +1,6 @@
+<%= @user.name %> 様
+
+以下が期限間近のタスクです。
+<% @tasks.each do |task| %>
+  <%= task_reminder(task) %>
+<% end %>

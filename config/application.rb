@@ -23,6 +23,8 @@ module Taskel
 
     config.assets.precompile += %w[admin/active_admin.css admin/active_admin.js]
 
+    config.autoload_paths += Dir["#{config.root}/lib/tasks"]
+
     # config.autoload_paths += Dir[Rails.root.join('app', 'uploaders')]
 
     # Settings in config/environments/* take precedence over those specified here.
