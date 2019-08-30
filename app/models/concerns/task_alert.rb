@@ -9,11 +9,6 @@ module TaskAlert
 
   private
   def set_task_alerts
-    set_group
     @task_alerts = @group.tasks.notice_tasks
-  end
-
-  def set_group
-    @group = Group.find(params[:group_id])
   end
 end

@@ -15,7 +15,7 @@ module ApplicationHelper
     end
   end
 
-  def side_by_side_labels(value)
-    value.labels.pluck(:name).join(', ')
+  def task_labels(task)
+    task.labels.pluck(:name).join(', ')
   end
 end

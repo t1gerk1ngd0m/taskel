@@ -12,11 +12,11 @@ html
       - if signed_in?
         li.nav-item
           .nav-link
-            = link_to "グループ一覧", root_path, method: :get, class: "color-white"
+            = link_to "グループ一覧", root_path, class: "color-white"
         - if @group.present? && @group.id.present? && !(@task_alerts.nil?)
           li.nav-item
             .nav-link
-              = link_to I18n.t('buttons.new'), new_group_task_path(@group), method: :get, class: "color-white"
+              = link_to I18n.t('buttons.new'), new_group_task_path(@group), class: "color-white"
           li.nav-item.color-white.alert-list
             #notice_tasks.nav-link
               = fa_icon("bell")
@@ -31,7 +31,7 @@ html
             = @current_user.name
       - else
         li.nav-item
-          = link_to I18n.t('buttons.login'), login_path, method: :get, class: "color-white login nav-link"
+          = link_to I18n.t('buttons.login'), login_path, class: "color-white login nav-link"
     = render partial: "layouts/flashes", flash: flash
     .container
       = yield

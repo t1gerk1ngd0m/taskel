@@ -1,8 +1,8 @@
 class TasksController < ApplicationController
-  include TaskAlert
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :set_group
   helper_method :sort_column, :sort_direction
+  include TaskAlert
 
   def index
     @tasks = @group.tasks.search(search_params).order("tasks.#{sort_column} #{sort_direction}").page(params[:page])

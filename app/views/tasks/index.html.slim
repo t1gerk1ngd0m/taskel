@@ -32,7 +32,7 @@
               - if(task.deadline)
                 = l(task.deadline, format: :default, default: '-')
             td.task-index__task--label
-              = side_by_side_labels(task)
+              = task_labels(task)
             td.task-index__task--created_at
               = l(task.created_at, format: :default, default: '-')
             th scope="row"
