@@ -59,6 +59,7 @@ class TasksController < ApplicationController
       :status, 
       :deadline, 
       :priority,
+      :file,
       { label_ids: [] }
     ).merge(user_id: current_user.id)
   end
@@ -70,6 +71,7 @@ class TasksController < ApplicationController
       :status, 
       :deadline, 
       :priority,
+      :file,
       { label_ids: [] }
     )
     t_params.except(:status) unless @task.user == current_user

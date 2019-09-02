@@ -9,6 +9,7 @@ class Task < ApplicationRecord
   validates :body, presence: true
   validates :status, presence: true
   validates :priority, presence: true
+  mount_uploader :file, FileUploader
 
   def self.search(params)
     search_record = self.all

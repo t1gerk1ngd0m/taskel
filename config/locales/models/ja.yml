@@ -17,6 +17,7 @@ ja:
         priority: 優先順位
         user_id: 作成者
         label: ラベル
+        file: ファイル
       user:
         name: ユーザー名
         email: メールアドレス

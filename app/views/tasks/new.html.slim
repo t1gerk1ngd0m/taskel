@@ -31,5 +31,11 @@
           .form-check.form-check-inline
             = b.check_box class: "form-check-input"
             = b.label class: "form-check-label"
+      .form-group
+        = f.label :file, t('activerecord.attributes.task.file')
+          span.btn.btn-primary
+            | Choose File
+            = f.file_field :file, style: "display:none", class: "uploadFile"
+        = f.text_field :file, class: "form-control", readonly: ""
       = f.button t('buttons.create'), type: "submit", class: "btn btn-primary mb-2"
       = link_to t('buttons.indexback'), root_path, method: :get, class: "btn btn-primary mb-2 b-margin"
