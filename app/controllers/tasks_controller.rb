@@ -1,6 +1,8 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :set_group
+  before_action :require_owner, only: [:destroy]
+  before_action :require_member, only: [:edit, :update, :show]
   helper_method :sort_column, :sort_direction
   include TaskAlert
 
@@ -30,7 +32,7 @@ class TasksController < ApplicationController
   end
 
   def update
-    if @task.update(task_params)
+    if @task.update(update_task_params)
       flash[:success] = t 'tasks.show.edited'
       redirect_to action: 'show'
     else
@@ -61,6 +63,19 @@ class TasksController < ApplicationController
     ).merge(user_id: current_user.id)
   end
 
+  def update_task_params
+    t_params = params.require(:task).permit(
+      :title, 
+      :body, 
+      :status, 
+      :deadline, 
+      :priority,
+      { label_ids: [] }
+    )
+    t_params.except(:status) unless @task.user == current_user
+    t_params
+  end
+
   def search_params
     params.permit(:title, :status, :label_id)
   end
@@ -79,5 +94,19 @@ class TasksController < ApplicationController
 
   def sort_column
     Task.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+  end
+
+  def require_owner
+    unless current_user == @task.user
+      flash[:failed] = t 'tasks.role.failed'
+      render :show
+    end
+  end
+
+  def require_member
+    unless (@group.users.any? {|n| n == current_user})
+      flash[:failed] = t 'tasks.role.failed'
+      redirect_to root_path
+    end
   end
 end

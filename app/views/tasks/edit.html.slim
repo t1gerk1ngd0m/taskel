@@ -13,8 +13,12 @@
         = render 'shared/validation_message', model: f.object, attributes: :body
       .form-group
         = f.label :status, t('activerecord.attributes.task.status')
-        = f.select :status, Task.statuses_i18n.keys.map { |k| [Task.statuses_i18n[k], k]}, { include_blank: "---" }, class: "form-control"
-        = render 'shared/validation_message', model: f.object, attributes: :status
+        - if @task.user == @current_user
+          = f.select :status, Task.statuses_i18n.keys.map { |k| [Task.statuses_i18n[k], k]}, { include_blank: "---" }, class: "form-control"
+          = render 'shared/validation_message', model: f.object, attributes: :status
+        - else
+          .form-control.border-none
+            = @task.status_i18n
       .form-group
         = f.label :deadline, t('activerecord.attributes.task.deadline')
         #datechoise.input-group.date data-target-input="nearest"

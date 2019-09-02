@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:edit, :update, :destroy]
+  before_action :require_owner, only: [:edit, :update, :destroy]
   before_action :set_users, only: [:new, :create, :edit, :update]
 
   def index
@@ -8,7 +9,7 @@ class GroupsController < ApplicationController
   
   def new
     @group = current_user.groups.build
-    @group.users << current_user
+    @group_users = User.where.not(id: current_user.id)
   end
 
   def create
@@ -50,11 +51,18 @@ class GroupsController < ApplicationController
     params.require(:group).permit(
       :name, 
       user_ids: []
-    )
+    ).merge(owner_user: current_user)
   end
 
   def set_group
     @group = Group.find(params[:id])
+  end
+
+  def require_owner
+    unless current_user == @group.owner_user
+      flash[:failed] = t 'groups.role.failed'
+      redirect_to root_path
+    end
   end
 
   def set_users

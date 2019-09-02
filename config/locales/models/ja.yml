@@ -26,6 +26,7 @@ ja:
       group:
         name: グループ名
         users: メンバー
+        owner: 所有者
   enums:
     task:
       status:

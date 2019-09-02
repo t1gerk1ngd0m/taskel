@@ -8,7 +8,9 @@
         th scope="col"
           = t('activerecord.attributes.group.name')
         th scope="col"
-          = t('activerecord.attributes.group.user')
+          = t('activerecord.attributes.group.users')
+        th scope="col"
+          = t('activerecord.attributes.group.owner')
         th scope="col"  タスク一覧
         th scope="col"  編集
         th scope="col"  削除
@@ -17,8 +19,11 @@
         tr
           td.group-index__group--name
             = group.name
-          td.group-index__group--user
+          td.group-index__group--users
             = group.users.pluck(:name).join(', ')
+          td.group-index__group--owner
+            - if group.owner_user.present?
+              = group.owner_user.name
           th scope="row"
             = link_to t('buttons.tasks'), group_tasks_path(group)
           th scope="row"
