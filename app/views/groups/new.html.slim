@@ -1,0 +1,18 @@
+.group-new
+  h1.group-new__new
+    | グループ新規作成画面
+  .group-new__form
+    = form_with model: @group, local: true do |f|
+      .form-group
+        = f.label :name, t('activerecord.attributes.group.name')
+        = f.text_field :name, placeholder: "グループ名", class: "form-control"
+        = render 'shared/validation_message', model: f.object, attributes: :name
+      .form-group
+        = f.label :name, t('activerecord.attributes.group.user')
+        = f.collection_check_boxes(:user_ids, @users, :id, :name, include_hidden: false) do |b|
+          .form-check
+            = b.check_box class: "form-check-input"
+            = b.label class: "form-check-label"
+      = render 'shared/validation_message', model: f.object, attributes: :users
+      = f.button t('buttons.create'), type: "submit", class: "btn btn-primary mb-2"
+      = link_to t('buttons.indexback'), root_path, method: :get, class: "btn btn-primary mb-2 b-margin"

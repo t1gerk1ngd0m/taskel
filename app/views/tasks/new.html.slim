@@ -2,7 +2,7 @@
   h1.task-index__show
     | 新規作成画面
   .task-new__form
-    = form_with model: @task, local: true do |f|
+    = form_with model: [@group,@task], local: true do |f|
       .form-group
         = f.label :title, t('activerecord.attributes.task.title')
         = f.text_field :title, placeholder: "タスクタイトル", class: "form-control"

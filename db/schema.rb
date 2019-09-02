@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_21_050552) do
+ActiveRecord::Schema.define(version: 2019_08_26_011656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2019_08_21_050552) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "owner", default: false, null: false
     t.index ["group_id"], name: "index_group_users_on_group_id"
     t.index ["user_id"], name: "index_group_users_on_user_id"
   end
@@ -55,6 +56,8 @@ ActiveRecord::Schema.define(version: 2019_08_21_050552) do
     t.datetime "updated_at", null: false
     t.integer "priority", default: 0, null: false
     t.bigint "user_id"
+    t.bigint "group_id"
+    t.index ["group_id"], name: "index_tasks_on_group_id"
     t.index ["title"], name: "index_tasks_on_title"
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
@@ -74,5 +77,6 @@ ActiveRecord::Schema.define(version: 2019_08_21_050552) do
   add_foreign_key "group_users", "users"
   add_foreign_key "task_labels", "labels"
   add_foreign_key "task_labels", "tasks"
+  add_foreign_key "tasks", "groups"
   add_foreign_key "tasks", "users"
 end

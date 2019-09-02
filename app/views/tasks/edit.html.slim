@@ -2,7 +2,7 @@
   h1
     | 編集画面
   .task-new__form
-    = form_with model: @task, local: true do |f|
+    = form_with model: [@group, @task], local: true do |f|
       .form-group
         = f.label :title, t('activerecord.attributes.task.title')
         = f.text_field :title, placeholder: "タスクタイトル", class: "form-control"
@@ -13,8 +13,12 @@
         = render 'shared/validation_message', model: f.object, attributes: :body
       .form-group
         = f.label :status, t('activerecord.attributes.task.status')
-        = f.select :status, Task.statuses_i18n.keys.map { |k| [Task.statuses_i18n[k], k]}, { include_blank: "---" }, class: "form-control"
-        = render 'shared/validation_message', model: f.object, attributes: :status
+        - if @task.user == @current_user
+          = f.select :status, Task.statuses_i18n.keys.map { |k| [Task.statuses_i18n[k], k]}, { include_blank: "---" }, class: "form-control"
+          = render 'shared/validation_message', model: f.object, attributes: :status
+        - else
+          .form-control.border-none
+            = @task.status_i18n
       .form-group
         = f.label :deadline, t('activerecord.attributes.task.deadline')
         #datechoise.input-group.date data-target-input="nearest"
@@ -32,4 +36,4 @@
             = b.check_box class: "form-check-input"
             = b.label class: "form-check-label"
       = f.button t('buttons.update'), type: "submit", class: "btn btn-primary mb-2"
-      = link_to t('buttons.showback'), task_path(@task.id), method: :get, class: "btn btn-primary mb-2 b-margin"
+      = link_to t('buttons.showback'), group_task_path(@group, @task), method: :get, class: "btn btn-primary mb-2 b-margin"

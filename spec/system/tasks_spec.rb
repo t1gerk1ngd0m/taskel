@@ -5,11 +5,12 @@ RSpec.describe 'Tasks', type: :system do
   before do
     @user = create(:user)
     login(@user)
+    @group = create(:group, users: [@user], owner_user: @user)
   end
 
   feature 'new page' do
 
-    given(:task) { create(:task,
+    given(:task) { build(:task,
       title: "タスクタイトル",
       body: "タスク本文",
       status: Task.statuses.key(0),
@@ -17,7 +18,7 @@ RSpec.describe 'Tasks', type: :system do
     ) }
 
     scenario 'succeed in task creation', type: :system do
-      visit new_task_path
+      visit new_group_task_path(group_id: @group.id)
 
       fill_in I18n.t('activerecord.attributes.task.title'), with: task.title
       fill_in I18n.t('activerecord.attributes.task.body'), with: task.body
@@ -34,7 +35,7 @@ RSpec.describe 'Tasks', type: :system do
     end
 
     scenario 'fail in task creation', type: :system do
-      visit new_task_path
+      visit new_group_task_path(group_id: @group.id)
 
       click_button I18n.t('buttons.create')
 
@@ -46,17 +47,18 @@ RSpec.describe 'Tasks', type: :system do
   feature 'edit page' do
 
     before do
-      @task = Task.create(
+      @task = create(:task,
         title: "タスクテスト", 
         body: "タスクテスト本文", 
         status: Task.statuses.key(1), 
         priority: Task.priorities.key(2),
-        user_id: @user.id
+        user_id: @user.id,
+        group_id: @group.id
       )
     end
 
     scenario 'succeed in task editation', type: :system do
-      visit edit_task_path(id: @task.id)
+      visit edit_group_task_path(group_id: @group.id, id: @task.id)
 
       fill_in I18n.t('activerecord.attributes.task.title'), with: @task.title
       fill_in I18n.t('activerecord.attributes.task.body'), with: @task.body
@@ -72,7 +74,7 @@ RSpec.describe 'Tasks', type: :system do
     end
 
     scenario 'fail in task editation', type: :system do
-      visit edit_task_path(id: @task.id)
+      visit edit_group_task_path(group_id: @group.id, id: @task.id)
 
       fill_in 'task_title', with: ''
       click_button I18n.t('buttons.update')
@@ -85,46 +87,49 @@ RSpec.describe 'Tasks', type: :system do
   feature 'index page' do
 
     before do
-      @task = Task.create(
+      @task = create(:task,
         title: "タスクテスト１", 
         body: "タスクテスト本文１", 
         status: Task.statuses["working"], 
         deadline: Date.today + 10.days, 
         priority: Task.priorities["high"],
-        user_id: @user.id
+        user_id: @user.id,
+        group_id: @group.id
       )
-      @task = Task.create(
+      @task = create(:task,
         title: "タスクテスト２", 
         body: "タスクテスト本文２", 
         status: Task.statuses["waiting"], 
         deadline: Date.today + 20.days, 
         priority: Task.priorities["middle"], 
         created_at: Time.current + 1.days,
-        user_id: @user.id
+        user_id: @user.id,
+        group_id: @group.id
       )
-      @task = Task.create(
+      @task = create(:task,
         title: "タスクテスト３", 
         body: "タスクテスト本文３", 
         status: Task.statuses["finished"], 
         priority: Task.priorities["low"], 
         created_at: Time.current + 2.days,
-        user_id: @user.id
+        user_id: @user.id,
+        group_id: @group.id
       )
-      @task = Task.create(
+      @task = create(:task,
         title: "タスクテスト４", 
         body: "タスクテスト本文４", 
         status: Task.statuses["waiting"], 
         deadline: Date.today + 20.days, 
         priority: Task.priorities["low"], 
         created_at: Time.current + 3.days,
-        user_id: @user.id
+        user_id: @user.id,
+        group_id: @group.id
       )
     end
 
     scenario 'sorted by creation date in default', type: :system do
-      visit root_path
+      visit group_tasks_path(group_id: @group.id)
       created_at_list = all(".task-index__task--created_at")
-      # i番目のデータの作成日時がi+1番目のデータの作成日時よりもあとであることを確認
       4.times do |i|
         if(created_at_list[i+1])
           expect(created_at_list[i].text()).to be > created_at_list[i+1].text()
@@ -133,11 +138,10 @@ RSpec.describe 'Tasks', type: :system do
     end
 
     scenario 'sorted by creation date by asc', type: :system do
-      visit root_path
+      visit group_tasks_path(group_id: @group.id)
       click_on I18n.t('activerecord.attributes.task.created_at')
       sleep 1
       created_at_list = all(".task-index__task--created_at")
-      # i番目のデータの作成日時がi+1番目のデータの作成日時よりも前であることを確認
       4.times do |i|
         if(created_at_list[i+1])
           expect(created_at_list[i].text()).to be < created_at_list[i+1].text()
@@ -146,7 +150,7 @@ RSpec.describe 'Tasks', type: :system do
     end
 
     scenario 'sorted by deadline by asc', type: :system do
-      visit root_path
+      visit group_tasks_path(group_id: @group.id)
       click_on I18n.t('activerecord.attributes.task.deadline')
       sleep 1
       deadline_list = all(".task-index__task--deadline")
@@ -158,7 +162,7 @@ RSpec.describe 'Tasks', type: :system do
     end
 
     scenario 'sorted by deadline by desc', type: :system do
-      visit root_path
+      visit group_tasks_path(group_id: @group.id)
       2.times do
         click_on I18n.t('activerecord.attributes.task.deadline')
       end
@@ -173,7 +177,7 @@ RSpec.describe 'Tasks', type: :system do
 
     scenario 'sorted by priority', type: :system do
       priority_hash = Task.priorities_i18n.keys.map { |k| [Task.priorities_i18n[k], Task.priorities[k]]}.to_h
-      visit root_path
+      visit group_tasks_path(group_id: @group.id)
       click_on I18n.t('activerecord.attributes.task.priority')
       sleep 1
       priority_list = all(".task-index__task--priority")
@@ -194,28 +198,28 @@ RSpec.describe 'Tasks', type: :system do
     end
 
     scenario 'suceeded in searching by title only', type: :system do
-      visit root_path
+      visit group_tasks_path(group_id: @group.id)
       fill_in I18n.t('activerecord.attributes.task.title'), with: "２"
       find('#search').click
       expect(page).to have_content("タスクテスト２")
     end
 
     scenario 'failed in searching by title only', type: :system do
-      visit root_path
+      visit group_tasks_path(group_id: @group.id)
       fill_in I18n.t('activerecord.attributes.task.title'), with: "タスクタスク"
       find('#search').click
       expect(page).to_not have_content("タスクテスト")
     end
 
     scenario 'searched by status only', type: :system do
-      visit root_path
+      visit group_tasks_path(group_id: @group.id)
       select I18n.t('enums.task.status.working') ,from: "search-status"
       find('#search').click
       expect(page).to have_content("タスクテスト１")
     end
 
     scenario 'searched by title and status', type: :system do
-      visit root_path
+      visit group_tasks_path(group_id: @group.id)
       fill_in I18n.t('activerecord.attributes.task.title'), with: "４"
       select I18n.t('enums.task.status.waiting') ,from: "search-status"
       find('#search').click
@@ -223,7 +227,7 @@ RSpec.describe 'Tasks', type: :system do
     end
 
     scenario 'searched by title and status', type: :system do
-      visit root_path
+      visit group_tasks_path(group_id: @group.id)
       fill_in I18n.t('activerecord.attributes.task.title'), with: "４"
       select I18n.t('enums.task.status.working') ,from: "search-status"
       find('#search').click
@@ -234,17 +238,18 @@ RSpec.describe 'Tasks', type: :system do
   feature 'show page' do
 
     before do
-      @task = Task.create(
+      @task = create(:task,
         title: "タスクテスト", 
         body: "タスクテスト本文", 
         status: Task.statuses.key(1), 
         priority: Task.priorities.key(0),
-        user_id: @user.id
+        user_id: @user.id,
+        group_id: @group.id
       )
     end
 
     scenario 'succeed in task destruction in show page', type: :system do
-      visit task_path(id: @task.id)
+      visit group_task_path(group_id: @group.id, id: @task.id)
       click_on I18n.t('buttons.delete')
 
       expect(page).to have_content("タスク一覧")

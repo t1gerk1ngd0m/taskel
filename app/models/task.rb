@@ -1,7 +1,8 @@
 class Task < ApplicationRecord
-  has_many :task_labels, dependent: :delete_all
+  has_many :task_labels, dependent: :destroy
   has_many :labels, through: :task_labels
   belongs_to :user
+  belongs_to :group
   enum status: { waiting: 0, working: 1, finished: 2}
   enum priority: { low: 0, middle: 1, high: 2}
   validates :title, presence: true

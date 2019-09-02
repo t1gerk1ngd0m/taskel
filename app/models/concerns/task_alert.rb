@@ -9,6 +9,6 @@ module TaskAlert
 
   private
   def set_task_alerts
-    @task_alerts = current_user.tasks.notice_tasks
+    @task_alerts = @group.tasks.notice_tasks
   end
 end

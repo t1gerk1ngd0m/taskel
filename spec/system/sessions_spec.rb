@@ -8,7 +8,7 @@ RSpec.describe 'Sessions', type: :system do
 
     scenario 'succeed in login', type: :system do
       login(@user)
-      expect(page).to have_content("タスク一覧")
+      expect(page).to have_content("グループ一覧画面")
       expect(page).to have_content(I18n.t('sessions.login.success'))
       expect(page).to have_content(@user.name)
     end

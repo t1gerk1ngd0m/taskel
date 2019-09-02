@@ -1,0 +1,32 @@
+.group-index
+  h1.group-index__new
+    | グループ一覧画面
+  = render partial: "new_group"
+  table.table.table-striped.table-hover
+    thead.column
+      tr
+        th scope="col"
+          = t('activerecord.attributes.group.name')
+        th scope="col"
+          = t('activerecord.attributes.group.users')
+        th scope="col"
+          = t('activerecord.attributes.group.owner')
+        th scope="col"  タスク一覧
+        th scope="col"  編集
+        th scope="col"  削除
+    tbody.column
+      - @groups.each do |group|
+        tr
+          td.group-index__group--name
+            = group.name
+          td.group-index__group--users
+            = group.users.pluck(:name).join(', ')
+          td.group-index__group--owner
+            - if group.owner_user.present?
+              = group.owner_user.name
+          th scope="row"
+            = link_to t('buttons.tasks'), group_tasks_path(group)
+          th scope="row"
+            = link_to t('buttons.edit'), edit_group_path(group)
+          th scope="row"
+            = link_to t('buttons.delete'), group_path(group), method: :delete

@@ -14,4 +14,8 @@ module ApplicationHelper
       when 'failed'   then 'alert-danger'
     end
   end
+
+  def task_labels(task)
+    task.labels.pluck(:name).join(', ')
+  end
 end
