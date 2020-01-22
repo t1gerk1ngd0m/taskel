@@ -82,3 +82,11 @@ gem 'kaminari', '>= 1.0.1'
 gem 'kaminari-bootstrap'
 gem 'bootstrap-sass'
 gem 'activeadmin'
+
+# Scraping
+gem 'faraday'
+gem 'faraday_middleware'
+gem 'faraday-detailed_logger'
+gem 'faraday-cookie_jar'
+gem 'mechanize'
+gem 'nokogiri'
